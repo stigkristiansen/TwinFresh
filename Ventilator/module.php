@@ -46,7 +46,7 @@ class Ventilator extends IPSModule {
 	{
 		IPS_LogMessage('TwinFresh','Received data');
 		$data = json_decode($JSONString);
-		$buffer = iconv("UTF-8","CP1252", $data->Buffer);
+		$buffer = iconv("UTF-8","ISO-8859-1", $data->Buffer);
 		$arr = str_split($buffer);
 		foreach($arr as $char) {
 			IPS_LogMessage('TwinFresh', ord($char));	
