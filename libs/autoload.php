@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-<?php
 //include_once __DIR__ . '/traits.php';
 
 IPS_LogMessage('TwinFresh', 'Inside Autoload');
