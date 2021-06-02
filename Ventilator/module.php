@@ -44,7 +44,12 @@ class Ventilator extends IPSModule {
 
 	public function ReceiveData($JSONString)
 	{
+		IPS_LogMessage('TwinFresh','Received data');
 		$data = json_decode($JSONString);
+		$arr = str_split($data->Buffer);
+		foreach($arr as $char) {
+			IPS_LogMessage('TwinFresh', ord($char));	
+		}
 		IPS_LogMessage('Device RECV', $data->Buffer . ' - ' . $data->ClientIP . ' - ' . $data->ClientPort);
 	}
 }
