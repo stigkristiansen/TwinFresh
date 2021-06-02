@@ -7,8 +7,8 @@ require_once(__DIR__ . "/../libs/autoload.php");
 class Vent {
     use Protocol;
 
-    const PORT = 4000;
-    private $ipAddress;
+    //const PORT = 4000;
+    //private $ipAddress;
     private $controllerId;
     private $password;
 
@@ -16,8 +16,8 @@ class Vent {
     private $speed;
     private $mode;
 
-    public function __construct(string $IPAddress, string $ControllerId, string $Password = '') {
-        $this->ipAddress = $IPAddress;
+    public function __construct(string $ControllerId, string $Password = '') {
+        //$this->ipAddress = $IPAddress;
         $this->controllerId = $ControllerId;
         $this->password = $Password;
 
@@ -28,7 +28,9 @@ class Vent {
 
     public function RefreshStatus() {
         $command = self::EncodeValue(self::$R).self::EncodeValue(self::$POWER).self::EncodeValue(self::$SPEED).self::EncodeValue(self::$MODE);
-        $this->SendCommand($command);
+        
+        return $command;
+        //$this->SendCommand($command);
     }
 
     public function Power(bool $State) {
