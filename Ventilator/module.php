@@ -17,6 +17,11 @@ class Ventilator extends IPSModule {
 		parent::Destroy();
 	}
 
+	public function Refresh() {
+		$vent = new Vent('192.168.0.107', '0022004547415717', '');
+		$vent->RefreshStatus();
+	}
+
 	public function ApplyChanges()
 	{
 		//Never delete this line!
