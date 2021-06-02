@@ -31,7 +31,7 @@ class Vent {
         $command = self::EncodeValue(self::$R).self::EncodeValue(self::$POWER).self::EncodeValue(self::$SPEED).self::EncodeValue(self::$MODE);
         IPS_LogMessage('TwinFresh', 'Built command');
 
-        $encodedCommand = $this->Encode($Command); 
+        $encodedCommand = $this->Encode($command); 
         IPS_LogMessage('TwinFresh', 'Built complete command');
         return $encodedCommand;
         //$this->SendCommand($command);
@@ -44,8 +44,9 @@ class Vent {
             $value = self::EncodeValue(self::$POWEROFF);
 
         $command = self::EncodeValue(self::$W).self::EncodeValue(self::$POWER).$value;
-        
-        return $command:
+        $encodedCommand = $this->Encode($command); 
+       
+        return $encodedCommand;
         //$this->SendCommand($command);
     }
 
@@ -65,8 +66,9 @@ class Vent {
         }
 
         $command = self::EncodeValue(self::$W).self::EncodeValue(self::$SPEED).self::EncodeValue(self::$$value);
-
-        return $command;
+        $encodedCommand = $this->Encode($command); 
+       
+        return $encodedCommand;
         //$this->SendCommand($command);
         
     }
@@ -87,8 +89,9 @@ class Vent {
         }
 
         $command = self::EncodeValue(self::$W).self::EncodeValue(self::$MODE).self::EncodeValue($value);
-        
-        return $command;
+        $encodedCommand = $this->Encode($command); 
+       
+        return $encodedCommand;
         //$this->SendCommand($command);
     }
 
