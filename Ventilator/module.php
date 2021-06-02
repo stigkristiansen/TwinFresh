@@ -38,6 +38,7 @@ class Ventilator extends IPSModule {
 
 	public function Send(string $Text, string $ClientIP, int $ClientPort)
 	{
+		$Text = $data = iconv("CP1252", "UTF-8", $Text);
 		$this->SendDataToParent(json_encode(['DataID' => '{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}', "ClientIP" => $ClientIP, "ClientPort" => $ClientPort, "Buffer" => $Text]));
 	}
 
