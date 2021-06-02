@@ -96,7 +96,7 @@ class Vent {
     }
 
     public function GetMode() {
-        retyrn $this->mode;
+        return $this->mode;
     }
 
     public function GetSpeed(){
@@ -104,7 +104,7 @@ class Vent {
     }
 
     public function GetPower() {
-        eturn $this->power;
+        return $this->power;
     }
 
     private function SendCommand(string $Command) {
