@@ -20,7 +20,7 @@ class Ventilator extends IPSModule {
 	public function Refresh() {
 		$vent = new Vent('0022004547415717', '');
 		$data = $vent->RefreshStatus();
-		IPS_LogMessage('TwinFresh', '$data');
+		IPS_LogMessage('TwinFresh', $data);
 		$this->Send($data,'192.168.0.107', 4000);
 	}
 
