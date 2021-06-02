@@ -24,6 +24,8 @@ class Vent {
         $this->power = -1;
         $this->speed = -1;
         $this->mode = -1;
+
+        IPS_LogMessage('TwinFresh', 'Class Vent initialized');
     }
 
     public function RefreshStatus() {
