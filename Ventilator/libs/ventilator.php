@@ -27,9 +27,13 @@ class Vent {
     }
 
     public function RefreshStatus() {
+        IPS_LogMessage('TwinFresh', 'Inside RefreshStatus()');
         $command = self::EncodeValue(self::$R).self::EncodeValue(self::$POWER).self::EncodeValue(self::$SPEED).self::EncodeValue(self::$MODE);
-        
-        return $command;
+        IPS_LogMessage('TwinFresh', 'Built command');
+
+        $encodedCommand = $this->Encode($Command); 
+        IPS_LogMessage('TwinFresh', 'Built complete command');
+        return $encodedCommand;
         //$this->SendCommand($command);
     }
 
