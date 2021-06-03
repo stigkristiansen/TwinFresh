@@ -18,16 +18,16 @@ class Ventilator extends IPSModule {
 		$this->RegisterPropertyString(Properties::PASSWORD, '');
 		$this->RegisterPropertyInteger(Properties::UPDATEINTERVAL, 5);
 
-		$this->RegisterProfileIntegerEx(Profiles::SPEED, Profiles::SPEED_ICON, '', '', [
-			[Speed::LOW, Speed::LOW_TEXT, '', -1],
-			[Speed|::MEDIUM, Speed::MEDIUM_TEXT, '', -1],
-			[Speed::HIGH, SPEED::HIGH_TEXT, '', -1]
-		]);
-
 		$this->RegisterProfileIntegerEx(Profiles::Mode, Profiles::Mode_ICON, '', '', [
 			[Mode::VENTILATION, Mode::VENTILATION_TEXT, '', -1],
 			[Mode::RECOVERY, Mode::RECOVERY_TEXT, '', -1],
 			[Mode::SUPPLY, Mode::SUPPLY_TEXT, '', -1]
+		]);
+		
+		$this->RegisterProfileIntegerEx(Profiles::SPEED, Profiles::SPEED_ICON, '', '', [
+			[Speed::LOW, Speed::LOW_TEXT, '', -1],
+			[Speed|::MEDIUM, Speed::MEDIUM_TEXT, '', -1],
+			[Speed::HIGH, SPEED::HIGH_TEXT, '', -1]
 		]);
 
 		$this->RegisterVariableBoolean(Variables::POWER_IDENT, Variables::POWER_TEXT, '~Switch', 1);
