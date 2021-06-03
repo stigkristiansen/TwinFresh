@@ -3,26 +3,26 @@
 declare(strict_types=1);
 
 class Protocol {
-    const $PREFIX = 0xfd;
-    const $TYPE = 0x02;
-    const $R = 0x01;
-    const $W = 0x02;
-    const $RW = 0x03;
-    const $INC = 0x04;
-    const $DEC = 0x05;
-    const $POWER = 0x01;
-    const $POWEROFF = 0x00;
-    const $POWERON = 0x01;
-    const $SPEED = 0x02;
-    const $SPEEDLOW = 0x01;
-    const $SPEEDMEDIUM = 0x02;
-    const $SPEEDHIGH = 0x03;
-    const $MODE = 0xb7;
-    const $MODEVENTILATION = 0x00;
-    const $MODERECOVERY = 0x01;
-    const $MODESUPPLY = 0x02;
-    const $RESPONSE = 0x06;
-    const $UNINITIZIALIZED = -1;
+    const PREFIX = 0xfd;
+    const TYPE = 0x02;
+    const R = 0x01;
+    const W = 0x02;
+    const RW = 0x03;
+    const INC = 0x04;
+    const DEC = 0x05;
+    const POWER = 0x01;
+    const POWEROFF = 0x00;
+    const POWERON = 0x01;
+    const SPEED = 0x02;
+    const SPEEDLOW = 0x01;
+    const SPEEDMEDIUM = 0x02;
+    const SPEEDHIGH = 0x03;
+    const MODE = 0xb7;
+    const MODEVENTILATION = 0x00;
+    const MODERECOVERY = 0x01;
+    const MODESUPPLY = 0x02;
+    const RESPONSE = 0x06;
+    const UNINITIZIALIZED = -1;
 
     public function Decode(string $Data) {
         $prefix = substr($Data, 0, 2);

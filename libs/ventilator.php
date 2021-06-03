@@ -16,13 +16,13 @@ class Vent extends Protocol {
         $this->controllerId = $ControllerId;
         $this->password = $Password;
 
-        $this->power = self::$UNINITIZIALIZED;
-        $this->speed = self::$UNINITIZIALIZED;
-        $this->mode = self::$UNINITIZIALIZED;
+        $this->power = self::UNINITIZIALIZED;
+        $this->speed = self::UNINITIZIALIZED;
+        $this->mode = self::UNINITIZIALIZED;
     }
 
     public function RefreshStatus() {
-        $command = self::EncodeValue(self::$R).self::EncodeValue(self::$POWER).self::EncodeValue(self::$SPEED).self::EncodeValue(self::$MODE);
+        $command = self::EncodeValue(self::R).self::EncodeValue(self::POWER).self::EncodeValue(self::SPEED).self::EncodeValue(self::MODE);
         $encodedCommand = $this->Encode($command); 
         
         return $encodedCommand;
@@ -30,11 +30,11 @@ class Vent extends Protocol {
 
     public function Power(bool $State) {
         if($State) 
-            $value = self::EncodeValue(self::$POWERON);
+            $value = self::EncodeValue(self::POWERON);
         else
-            $value = self::EncodeValue(self::$POWEROFF);
+            $value = self::EncodeValue(self::POWEROFF);
 
-        $command = self::EncodeValue(self::$RW).self::EncodeValue(self::$POWER).$value;
+        $command = self::EncodeValue(self::RW).self::EncodeValue(self::POWER).$value;
         $encodedCommand = $this->Encode($command); 
        
         return $encodedCommand;
@@ -43,19 +43,19 @@ class Vent extends Protocol {
     public function Speed(int $Speed) {
         switch($Speed) {
             case 1:
-                $value = self::$SPEEDLOW;
+                $value = self::SPEEDLOW;
                 break;
             case 2:
-                $value = self::$SPEEDMEDIUM;
+                $value = self::SPEEDMEDIUM;
                 break;
             case 3:
-                $value = self::$SPEEDHIGH;
+                $value = self::SPEEDHIGH;
                 break;
             default:
                 return false;
         }
 
-        $command = self::EncodeValue(self::$RW).self::EncodeValue(self::$SPEED).self::EncodeValue($value);
+        $command = self::EncodeValue(self::RW).self::EncodeValue(self::SPEED).self::EncodeValue($value);
         $encodedCommand = $this->Encode($command); 
        
         return $encodedCommand;
@@ -64,19 +64,19 @@ class Vent extends Protocol {
     public function Mode(int $Mode) {
         switch($Mode) {
             case 0:
-                $value = self::$MODEVENTILATION;
+                $value = self::MODEVENTILATION;
                 break;
             case 1:
-                $value = self::$MODERECOVERY;
+                $value = self::MODERECOVERY;
                 break;
             case 2:
-                $value = self::$MODESUPPLY;
+                $value = self::MODESUPPLY;
                 break;
             default:
                 return false;
         }
 
-        $command = self::EncodeValue(self::$RW).self::EncodeValue(self::$MODE).self::EncodeValue($value);
+        $command = self::EncodeValue(self::RW).self::EncodeValue(self::MODE).self::EncodeValue($value);
         $encodedCommand = $this->Encode($command); 
        
         return $encodedCommand;
