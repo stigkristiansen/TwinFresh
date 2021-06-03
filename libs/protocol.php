@@ -34,6 +34,18 @@ class Protocol {
         $this->mode = self::UNINITIZIALIZED;
     }
 
+    public function GetMode() {
+        return $this->mode;
+    }
+
+    public function GetSpeed(){
+        return $this->speed;
+    }
+
+    public function GetPower() {
+        return $this->power;
+    }
+
     public function Decode(string $Data) {
         $prefix = substr($Data, 0, 2);
        
@@ -89,6 +101,11 @@ class Protocol {
         }
     }
 
+    protected function Encode(string $Data, string $ControllerId, string $Password){
+        $data = self::EncodeValue(self::TYPE).$this->EncodeControllerId($ControllerId).$this->EncodePassword($Password).$Data;
+        return self::EncodeValue(self::PREFIX).$data.$this->Checksum($data);
+    }
+
     private function Checksum(string $Data) {
         $arr = str_split($Data);
         $sum = 0;
@@ -104,11 +121,6 @@ class Protocol {
         return chr($low).chr($high);
     }
 
-    protected function Encode(string $Data, string $ControllerId, string $Password){
-        $data = self::EncodeValue(self::TYPE).$this->EncodeControllerId($ControllerId).$this->EncodePassword($Password).$Data;
-        return self::EncodeValue(self::PREFIX).$data.$this->Checksum($data);
-    }
-
     private function EncodeControllerId(string $ControllerId) {
         $size = strlen($ControllerId);
         return chr($size).$ControllerId;
@@ -121,17 +133,4 @@ class Protocol {
         else
             return chr(0x00);
     }
-
-    public function GetMode() {
-        return $this->mode;
-    }
-
-    public function GetSpeed(){
-        return $this->speed;
-    }
-
-    public function GetPower() {
-        return $this->power;
-    }
-    
 }
