@@ -41,8 +41,7 @@ class Vent {
     }
 
     public function Speed(int $Speed) {
-        IPS_LogMessage('TwinFresh', 'Inside Vent::Speed(). Settting speed to '.$Speed);
-        
+                
         switch($Speed) {
             case 1:
                 $value = self::$SPEEDLOW;
@@ -54,7 +53,6 @@ class Vent {
                 $value = self::$SPEEDHIGH;
                 break;
             default:
-                IPS_LogMessage('TwinFresh', 'Inside Vent::Speed(). Invalid value!');
                 return false;
         }
 
