@@ -64,8 +64,6 @@ trait Protocol {
                     return false;
            }
         }
-
-        //print_r('Power: '.$this->power.' Mode: '.$this->mode.' Speed: '.$this->speed);
         
         return true;
     }
@@ -77,5 +75,38 @@ trait Protocol {
             default:
                 return chr($Value);
         }
+    }
+
+    private function Checksum(string $Data) {
+        $arr = str_split($Data);
+        $sum = 0;
+        
+        foreach ($arr as $char) {
+           $value = ord($char);
+           $sum+=$value;    
+        }
+        
+        $low = $sum & 0xff;
+        $high = $sum >> 8;
+       
+        return chr($low).chr($high);
+    }
+
+    private function Encode($Data){
+        $data = self::EncodeValue(self::$TYPE).$this->EncodeControllerId().$this->EncodePassword().$Data;
+        return self::EncodeValue(self::$PREFIX).$data.$this->Checksum($data);
+    }
+
+    private function EncodeControllerId() {
+        $size = strlen($this->controllerId);
+        return chr($size).$this->controllerId;
+    }
+
+    private function EncodePassword(){
+        $size = strlen($this->password);
+        if($size>0)
+            return chr($size).$this->password;
+        else
+            return chr(0x00);
     }
 }

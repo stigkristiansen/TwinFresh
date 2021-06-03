@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 class Vent {
     use Protocol;
-
-    //const PORT = 4000;
-    //private $ipAddress;
+    
     private $controllerId;
     private $password;
 
@@ -15,26 +13,19 @@ class Vent {
     private $mode;
 
     public function __construct(string $ControllerId, string $Password = '') {
-        //$this->ipAddress = $IPAddress;
         $this->controllerId = $ControllerId;
         $this->password = $Password;
 
         $this->power = -1;
         $this->speed = -1;
         $this->mode = -1;
-
-        IPS_LogMessage('TwinFresh', 'Class Vent initialized');
     }
 
     public function RefreshStatus() {
-        IPS_LogMessage('TwinFresh', 'Inside RefreshStatus()');
         $command = self::EncodeValue(self::$R).self::EncodeValue(self::$POWER).self::EncodeValue(self::$SPEED).self::EncodeValue(self::$MODE);
-        IPS_LogMessage('TwinFresh', 'Built command');
-
         $encodedCommand = $this->Encode($command); 
-        IPS_LogMessage('TwinFresh', 'Built complete command');
+        
         return $encodedCommand;
-        //$this->SendCommand($command);
     }
 
     public function Power(bool $State) {
@@ -47,7 +38,6 @@ class Vent {
         $encodedCommand = $this->Encode($command); 
        
         return $encodedCommand;
-        //$this->SendCommand($command);
     }
 
     public function Speed(int $Speed) {
@@ -69,8 +59,6 @@ class Vent {
         $encodedCommand = $this->Encode($command); 
        
         return $encodedCommand;
-        //$this->SendCommand($command);
-        
     }
 
     public function Mode(int $Mode) {
@@ -92,7 +80,6 @@ class Vent {
         $encodedCommand = $this->Encode($command); 
        
         return $encodedCommand;
-        //$this->SendCommand($command);
     }
 
     public function GetMode() {
@@ -106,43 +93,5 @@ class Vent {
     public function GetPower() {
         return $this->power;
     }
-
-    private function SendCommand(string $Command) {
-        $encodedData = $this->Encode($Command);      
-
-        USCK_SendPacket(39441, $encodedData,$this->ipAddress, self::PORT);
-    }
-
-    private function Checksum(string $Data) {
-        $arr = str_split($Data);
-        $sum = 0;
-        
-        foreach ($arr as $char) {
-           $value = ord($char);
-           $sum+=$value;    
-        }
-        
-        $low = $sum & 0xff;
-        $high = $sum >> 8;
-       
-        return chr($low).chr($high);
-    }
-
-    private function Encode($Data){
-        $data = self::EncodeValue(self::$TYPE).$this->EncodeControllerId().$this->EncodePassword().$Data;
-        return self::EncodeValue(self::$PREFIX).$data.$this->Checksum($data);
-    }
-
-    private function EncodeControllerId() {
-        $size = strlen($this->controllerId);
-        return chr($size).$this->controllerId;
-    }
-
-    private function EncodePassword(){
-        $size = strlen($this->password);
-        if($size>0)
-            return chr($size).$this->password;
-        else
-            return chr(0x00);
-    }
+    
 }

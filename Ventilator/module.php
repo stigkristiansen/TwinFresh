@@ -5,16 +5,15 @@ declare(strict_types=1);
 require_once(__DIR__ . "/../libs/autoload.php");
 
 class Ventilator extends IPSModule {
-	public function Create()
-	{
+	
+	public function Create(){
 		//Never delete this line!
 		parent::Create();
 
 		$this->RequireParent('{82347F20-F541-41E1-AC5B-A636FD3AE2D8}');
 	}
 
-	public function Destroy()
-	{
+	public function Destroy(){
 		//Never delete this line!
 		parent::Destroy();
 	}
@@ -36,13 +35,11 @@ class Ventilator extends IPSModule {
 		parent::ApplyChanges();
 	}
 
-	public function Send(string $Text, string $ClientIP, int $ClientPort)
-	{
+	private function Send(string $Text, string $ClientIP, int $ClientPort){
 		$this->SendDataToParent(json_encode(['DataID' => '{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}', "ClientIP" => $ClientIP, "ClientPort" => $ClientPort, "Buffer" => iconv("ISO-8859-1", "UTF-8", $Text)]));
 	}
 
-	public function ReceiveData($JSONString)
-	{
+	public function ReceiveData($JSONString){
 		IPS_LogMessage('TwinFresh','Received data');
 		$data = json_decode($JSONString);
 		$buffer = iconv("UTF-8","ISO-8859-1", $data->Buffer);
@@ -50,8 +47,6 @@ class Ventilator extends IPSModule {
 		foreach($arr as $char) {
 			IPS_LogMessage('TwinFresh', ord($char));	
 		}
-		
-
-
+	
 	}
 }
