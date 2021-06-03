@@ -116,6 +116,8 @@ class Ventilator extends IPSModule {
 		if($this->VerifyDeviceIp($ipAddress)){
 			$controlId = $this->ReadPropertyString(Properties::ID);
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
+
+			IPS_LogMessage('TwinFresh', 'IP verified');
 			
 			$vent = new Vent($controlId, $password);
 			$data = $vent->Speed($Value);
