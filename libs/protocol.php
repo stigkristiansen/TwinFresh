@@ -70,7 +70,7 @@ class Protocol {
         return true;
     }
 
-    private function EncodeValue(int $Value) {
+    protected function EncodeValue(int $Value) {
         switch($Value) {
             case self::$PREFIX:
                 return chr($Value).chr($Value);
@@ -79,7 +79,7 @@ class Protocol {
         }
     }
 
-    private function Checksum(string $Data) {
+    protected function Checksum(string $Data) {
         $arr = str_split($Data);
         $sum = 0;
         
@@ -94,17 +94,17 @@ class Protocol {
         return chr($low).chr($high);
     }
 
-    private function Encode($Data){
+    protected function Encode($Data){
         $data = self::EncodeValue(self::$TYPE).$this->EncodeControllerId().$this->EncodePassword().$Data;
         return self::EncodeValue(self::$PREFIX).$data.$this->Checksum($data);
     }
 
-    private function EncodeControllerId() {
+    protected function EncodeControllerId() {
         $size = strlen($this->controllerId);
         return chr($size).$this->controllerId;
     }
 
-    private function EncodePassword(){
+    protected function EncodePassword(){
         $size = strlen($this->password);
         if($size>0)
             return chr($size).$this->password;
