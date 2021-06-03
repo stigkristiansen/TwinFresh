@@ -22,6 +22,7 @@ trait Protocol {
     static $MODERECOVERY = 0x01;
     static $MODESUPPLY = 0x02;
     static $RESPONSE = 0x06;
+    static $UNINITIZIALIZED = -1;
 
     public function Decode(string $Data) {
         $prefix = substr($Data, 0, 2);

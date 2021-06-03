@@ -16,9 +16,9 @@ class Vent {
         $this->controllerId = $ControllerId;
         $this->password = $Password;
 
-        $this->power = -1;
-        $this->speed = -1;
-        $this->mode = -1;
+        $this->power = self::$UNINITIZIALIZED;
+        $this->speed = self::$UNINITIZIALIZED;
+        $this->mode = self::$UNINITIZIALIZED;
     }
 
     public function RefreshStatus() {
