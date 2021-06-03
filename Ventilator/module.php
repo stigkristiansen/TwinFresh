@@ -99,7 +99,11 @@ class Ventilator extends IPSModule {
 			
 			$vent = new Vent($controlId, $password);
 			$data = $vent->Power($State);
-		
+			$arr = str_split($data);
+			foreach($arr as $char) {
+				IPS_LogMessage('TwinFresh', ord($char));	
+			}
+			
 			$this->Send($data, $ipAddress, Udp::PORT);
 		}
 	}

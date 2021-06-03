@@ -7,6 +7,7 @@ trait Protocol {
     static $TYPE = 0x02;
     static $R = 0x01;
     static $W = 0x02;
+    static $RW = 0x03;
     static $INC = 0x04;
     static $DEC = 0x05;
     static $POWER = 0x01;
