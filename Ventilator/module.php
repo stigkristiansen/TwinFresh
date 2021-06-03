@@ -39,8 +39,7 @@ class Ventilator extends IPSModule {
 
 		$this->RegisterVariableInteger(Variables::MODE_IDENT, Variables::MODE_TEXT, Profiles::MODE, 3);
 		$this->EnableAction(Variables::MODE_IDENT);
-
-		IPS_LogMessage('TwinFresh', 'Create() finished!');
+		
 	}
 
 	public function Destroy(){
