@@ -46,13 +46,6 @@ class Protocol {
         return $this->power;
     }
 
-    protected function EncodePower(int $Value) {
-        $command = self::EncodeValue(self::RW).self::EncodeValue(self::POWER).$Value;
-        $encodedCommand = $this->Encode($command, $this->controllerId, $this->password); 
-       
-        return $encodedCommand;
-    }
-
     public function Decode(string $Data) {
         $prefix = substr($Data, 0, 2);
        
