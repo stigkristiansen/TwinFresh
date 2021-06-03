@@ -32,11 +32,12 @@ class Ventilator extends IPSModule {
 
 		IPS_LogMessage('TwinFresh', 'Creating profile Mode...');
 
-		$this->RegisterProfileIntegerEx(Profiles::Mode, Profiles::Mode_ICON, '', '', [
+		$this->RegisterProfileIntegerEx(Profiles::MODE, Profiles::MODE_ICON, '', '', [
 			[Mode::VENTILATION, Mode::VENTILATION_TEXT, '', -1],
 			[Mode::RECOVERY, Mode::RECOVERY_TEXT, '', -1],
 			[Mode::SUPPLY, Mode::SUPPLY_TEXT, '', -1]
 		]);
+
 
 		IPS_LogMessage('TwinFresh', 'Register Variables...');
 

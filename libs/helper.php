@@ -20,9 +20,9 @@ class Timers {
 }
 
 class Profiles {
-    const SPEED = 'TF.Speed';
+    const SPEED = 'TwinFresh.Speed';
     const SPEED_ICON = 'Intensity';
-    const MODE = 'TF.Mode';
+    const MODE = 'TwinFresh.Mode';
     const MODE_ICON = 'Ventilation';
 }
 
@@ -37,7 +37,7 @@ class Speed {
 
 class Mode {
     const VENTILATION = 0;
-    const DISABLED_TEXT = 'Ventilation';
+    const VENTILATION_TEXT = 'Ventilation';
     const RECOVERY = 1;
     const RECOVERY_TEXT = 'Heat Recovery';
     const SUPPLY = 2;
