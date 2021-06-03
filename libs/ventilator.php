@@ -55,6 +55,8 @@ class Vent {
                 return false;
         }
 
+        IPS_LogMessage('TwinFresh', 'Inside Vent::Speed()');
+
         $command = self::EncodeValue(self::$RW).self::EncodeValue(self::$SPEED).self::EncodeValue($value);
         $encodedCommand = $this->Encode($command); 
        
