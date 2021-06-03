@@ -3,31 +3,31 @@
 declare(strict_types=1);
 
 class Protocol {
-    static $PREFIX = 0xfd;
-    static $TYPE = 0x02;
-    static $R = 0x01;
-    static $W = 0x02;
-    static $RW = 0x03;
-    static $INC = 0x04;
-    static $DEC = 0x05;
-    static $POWER = 0x01;
-    static $POWEROFF = 0x00;
-    static $POWERON = 0x01;
-    static $SPEED = 0x02;
-    static $SPEEDLOW = 0x01;
-    static $SPEEDMEDIUM = 0x02;
-    static $SPEEDHIGH = 0x03;
-    static $MODE = 0xb7;
-    static $MODEVENTILATION = 0x00;
-    static $MODERECOVERY = 0x01;
-    static $MODESUPPLY = 0x02;
-    static $RESPONSE = 0x06;
-    static $UNINITIZIALIZED = -1;
+    const $PREFIX = 0xfd;
+    const $TYPE = 0x02;
+    const $R = 0x01;
+    const $W = 0x02;
+    const $RW = 0x03;
+    const $INC = 0x04;
+    const $DEC = 0x05;
+    const $POWER = 0x01;
+    const $POWEROFF = 0x00;
+    const $POWERON = 0x01;
+    const $SPEED = 0x02;
+    const $SPEEDLOW = 0x01;
+    const $SPEEDMEDIUM = 0x02;
+    const $SPEEDHIGH = 0x03;
+    const $MODE = 0xb7;
+    const $MODEVENTILATION = 0x00;
+    const $MODERECOVERY = 0x01;
+    const $MODESUPPLY = 0x02;
+    const $RESPONSE = 0x06;
+    const $UNINITIZIALIZED = -1;
 
     public function Decode(string $Data) {
         $prefix = substr($Data, 0, 2);
        
-        if(strcmp($prefix, self::EncodeValue(self::$PREFIX))!=0)
+        if(strcmp($prefix, self::EncodeValue(self::PREFIX))!=0)
             return false;
         
         $receivedChecksum = substr($Data, strlen($Data)-2);
@@ -39,7 +39,7 @@ class Protocol {
 
         $parameters = str_split($data);
 
-        if(strcmp($parameters[0], self::EncodeValue(self::$TYPE))!=0)
+        if(strcmp($parameters[0], self::EncodeValue(self::TYPE))!=0)
             return false;
 
         $idSize = ord($parameters[1]);
@@ -48,17 +48,17 @@ class Protocol {
       
         for($i=$startIndex;$i<sizeof($parameters);$i++) {
             switch(ord($parameters[$i])) {
-                case self::$RESPONSE:
+                case self::RESPONSE:
                     break;
-                case self::$POWER:
+                case self::POWER:
                     $i++;
                     $this->power = ord($parameters[$i]);
                     break;
-                case self::$SPEED:
+                case self::SPEED:
                     $i++;
                     $this->speed = ord($parameters[$i]);
                     break;
-                case self::$MODE:
+                case self::MODE:
                     $i++;
                     $this->mode = ord($parameters[$i]);
                     break;
@@ -72,7 +72,7 @@ class Protocol {
 
     protected function EncodeValue(int $Value) {
         switch($Value) {
-            case self::$PREFIX:
+            case self::PREFIX:
                 return chr($Value).chr($Value);
             default:
                 return chr($Value);
@@ -95,8 +95,8 @@ class Protocol {
     }
 
     protected function Encode($Data){
-        $data = self::EncodeValue(self::$TYPE).$this->EncodeControllerId().$this->EncodePassword().$Data;
-        return self::EncodeValue(self::$PREFIX).$data.$this->Checksum($data);
+        $data = self::EncodeValue(self::TYPE).$this->EncodeControllerId().$this->EncodePassword().$Data;
+        return self::EncodeValue(self::PREFIX).$data.$this->Checksum($data);
     }
 
     protected function EncodeControllerId() {
