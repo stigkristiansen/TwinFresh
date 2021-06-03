@@ -11,24 +11,34 @@ class Ventilator extends IPSModule {
 		//Never delete this line!
 		parent::Create();
 
+		IPS_LogMessage('TwinFresh', 'Inside Create()...');
+		
 		$this->RequireParent('{82347F20-F541-41E1-AC5B-A636FD3AE2D8}');
+
+		IPS_LogMessage('TwinFresh', 'Creating Properties...');
 
 		$this->RegisterPropertyString(Properties::IPADDRESS, '');
 		$this->RegisterPropertyString(Properties::ID, '');
 		$this->RegisterPropertyString(Properties::PASSWORD, '');
 		$this->RegisterPropertyInteger(Properties::UPDATEINTERVAL, 5);
 
-		$this->RegisterProfileIntegerEx(Profiles::Mode, Profiles::Mode_ICON, '', '', [
-			[Mode::VENTILATION, Mode::VENTILATION_TEXT, '', -1],
-			[Mode::RECOVERY, Mode::RECOVERY_TEXT, '', -1],
-			[Mode::SUPPLY, Mode::SUPPLY_TEXT, '', -1]
-		]);
-		
+		IPS_LogMessage('TwinFresh', 'Creating profile Speed');
+
 		$this->RegisterProfileIntegerEx(Profiles::SPEED, Profiles::SPEED_ICON, '', '', [
 			[Speed::LOW, Speed::LOW_TEXT, '', -1],
 			[Speed::MEDIUM, Speed::MEDIUM_TEXT, '', -1],
 			[Speed::HIGH, SPEED::HIGH_TEXT, '', -1]
 		]);
+
+		IPS_LogMessage('TwinFresh', 'Creating profile Mode...');
+
+		$this->RegisterProfileIntegerEx(Profiles::Mode, Profiles::Mode_ICON, '', '', [
+			[Mode::VENTILATION, Mode::VENTILATION_TEXT, '', -1],
+			[Mode::RECOVERY, Mode::RECOVERY_TEXT, '', -1],
+			[Mode::SUPPLY, Mode::SUPPLY_TEXT, '', -1]
+		]);
+
+		IPS_LogMessage('TwinFresh', 'Register Variables...');
 
 		$this->RegisterVariableBoolean(Variables::POWER_IDENT, Variables::POWER_TEXT, '~Switch', 1);
 		$this->EnableAction(Variables::POWER_IDENT);
@@ -38,6 +48,8 @@ class Ventilator extends IPSModule {
 
 		$this->RegisterVariableInteger(Variables::MODE_IDENT, Variables::MODE_TEXT, Profiles::MODE, 3);
 		$this->EnableAction(Variables::MODE_IDENT);
+
+		IPS_LogMessage('TwinFresh', 'Create() finished!');
 	}
 
 	public function Destroy(){
