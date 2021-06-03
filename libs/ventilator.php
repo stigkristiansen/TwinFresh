@@ -16,9 +16,9 @@ class Vent extends Protocol {
 
     public function RefreshStatus() {
         $command = self::EncodeValue(self::R).self::EncodeValue(self::POWER).self::EncodeValue(self::SPEED).self::EncodeValue(self::MODE);
-        $encodedCommand = $this->Encode($command, $this->controllerId, $this->password); 
+        $message = $this->Encode($command, $this->controllerId, $this->password); 
         
-        return $encodedCommand;
+        return $message;
     }
 
     public function Power(bool $State) {
@@ -49,9 +49,9 @@ class Vent extends Protocol {
         }
 
         $command = self::EncodeValue(self::RW).self::EncodeValue(self::SPEED).self::EncodeValue($value);
-        $encodedCommand = $this->Encode($command, $this->controllerId, $this->password); 
+        $message = self::Encode($command, $this->controllerId, $this->password); 
        
-        return $encodedCommand;
+        return $message;
     }
 
     public function Mode(int $Mode) {
@@ -70,9 +70,9 @@ class Vent extends Protocol {
         }
 
         $command = self::EncodeValue(self::RW).self::EncodeValue(self::MODE).self::EncodeValue($value);
-        $encodedCommand = $this->Encode($command, $this->controllerId, $this->password); 
+        $message = self::Encode($command, $this->controllerId, $this->password); 
        
-        return $encodedCommand;
+        return $message;
     }
 
 

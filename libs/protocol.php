@@ -101,9 +101,9 @@ class Protocol {
         }
     }
 
-    protected function Encode(string $Data, string $ControllerId, string $Password){
-        $data = self::EncodeValue(self::TYPE).$this->EncodeControllerId($ControllerId).$this->EncodePassword($Password).$Data;
-        return self::EncodeValue(self::PREFIX).$data.$this->Checksum($data);
+    protected function Encode(string $Command, string $ControllerId, string $Password){
+        $delta = self::EncodeValue(self::TYPE).$this->EncodeControllerId($ControllerId).$this->EncodePassword($Password).$Command;
+        return self::EncodeValue(self::PREFIX).$delta.$this->Checksum($delta);
     }
 
     private function Checksum(string $Data) {

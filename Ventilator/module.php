@@ -104,7 +104,6 @@ class Ventilator extends IPSModule {
 		$this->SetTimerInterval(Timers::UPDATE . (string) $this->InstanceID, $this->ReadPropertyInteger(Properties::UPDATEINTERVAL)*1000);
 	}
 
-
 	private function Power(bool $State) {
 		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 						
@@ -113,9 +112,9 @@ class Ventilator extends IPSModule {
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 			
 			$vent = new Vent($controlId, $password);
-			$data = $vent->Power($State);
+			$message = $vent->Power($State);
 			
-			$this->Send($data, $ipAddress, Udp::PORT);
+			$this->Send($message, $ipAddress, Udp::PORT);
 		}
 	}
 
@@ -127,12 +126,11 @@ class Ventilator extends IPSModule {
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 
 			$vent = new Vent($controlId, $password);
-			$data = $vent->Speed($Value);
+			$message = $vent->Speed($Value);
 		
-			$this->Send($data, $ipAddress, Udp::PORT);
+			$this->Send($message, $ipAddress, Udp::PORT);
 		}
 	}
-
 
 	private function Mode(int $Value) {
 		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
@@ -142,9 +140,9 @@ class Ventilator extends IPSModule {
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 			
 			$vent = new Vent($controlId, $password);
-			$data = $vent->Mode($Value);
+			$message = $vent->Mode($Value);
 		
-			$this->Send($data, $ipAddress, Udp::PORT);
+			$this->Send($message, $ipAddress, Udp::PORT);
 		}
 	}
 
@@ -156,9 +154,9 @@ class Ventilator extends IPSModule {
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 			
 			$vent = new Vent($controlId, $password);
-			$data = $vent->RefreshStatus();
+			$message = $vent->RefreshStatus();
 		
-			$this->Send($data, $ipAddress, Udp::PORT);
+			$this->Send($message, $ipAddress, Udp::PORT);
 		}
 	}
 
