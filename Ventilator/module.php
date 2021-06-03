@@ -26,7 +26,7 @@ class Ventilator extends IPSModule {
 		
 		$this->RegisterProfileIntegerEx(Profiles::SPEED, Profiles::SPEED_ICON, '', '', [
 			[Speed::LOW, Speed::LOW_TEXT, '', -1],
-			[Speed|::MEDIUM, Speed::MEDIUM_TEXT, '', -1],
+			[Speed::MEDIUM, Speed::MEDIUM_TEXT, '', -1],
 			[Speed::HIGH, SPEED::HIGH_TEXT, '', -1]
 		]);
 
