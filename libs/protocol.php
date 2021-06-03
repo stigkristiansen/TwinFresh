@@ -28,6 +28,12 @@ class Protocol {
     private $speed;
     private $mode;
 
+    public function __construct() {
+        $this->power = self::UNINITIZIALIZED;
+        $this->speed = self::UNINITIZIALIZED;
+        $this->mode = self::UNINITIZIALIZED;
+    }
+
     public function Decode(string $Data) {
         $prefix = substr($Data, 0, 2);
        

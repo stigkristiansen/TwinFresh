@@ -8,12 +8,10 @@ class Vent extends Protocol {
 
 
     public function __construct(string $ControllerId, string $Password = '') {
+        parent::__construct();
+
         $this->controllerId = $ControllerId;
         $this->password = $Password;
-
-        $this->power = self::UNINITIZIALIZED;
-        $this->speed = self::UNINITIZIALIZED;
-        $this->mode = self::UNINITIZIALIZED;
     }
 
     public function RefreshStatus() {
