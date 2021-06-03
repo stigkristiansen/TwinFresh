@@ -2,6 +2,25 @@
 
 declare(strict_types=1);
 
+trait BufferHelper {
+    protected function Lock(string $Id) {
+		for ($count=0;$count<10;$count++) {
+			if (IPS_SemaphoreEnter(get_class() . (string) $this->InstanceID . $Id, 1000)) {
+				return true;
+			} else {
+				IPS_Sleep(mt_rand(1, 5));
+			}
+		}
+
+		return false;
+	}
+
+	protected function Unlock(string $Id) {
+		IPS_SemaphoreLeave(get_class() . (string) $this->InstanceID . $Id);
+	}
+}
+
+
 trait ProfileHelper {
     protected function DeleteProfile($Name) {
         if(IPS_VariableProfileExists($Name))
