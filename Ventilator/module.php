@@ -74,9 +74,7 @@ class Ventilator extends IPSModule {
 					$this->Power($Value);
 					break;
 				case Variables::SPEED_IDENT:
-					if($this->GetValue(Variables::POWER_IDENT)) {   // Don't care if the device is off
-						$this->Speed($Value);
-					}
+					$this->Speed($Value);
 					break;
 				case Variables::MODE_IDENT:
 					if($Value>200) { // Values above 200 is used inside scheduled scripts and Form Actions
@@ -85,7 +83,7 @@ class Ventilator extends IPSModule {
 								$this->Refresh();
 								break;
 						}
-					} else if($this->GetValue(Variables::POWER_IDENT)) {   // Don't care if the device is off
+					} else  { 
 						$this->Mode($Value);
 					}
 					break;
