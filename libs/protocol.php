@@ -14,9 +14,9 @@ trait Protocol {
     static $POWEROFF = 0x00;
     static $POWERON = 0x01;
     static $SPEED = 0x02;
-    static $SPEDDLOW = 0x01;
+    static $SPEEDLOW = 0x01;
     static $SPEEDMEDIUM = 0x02;
-    static $SPEDDHIGH = 0x03;
+    static $SPEEDHIGH = 0x03;
     static $MODE = 0xb7;
     static $MODEVENTILATION = 0x00;
     static $MODERECOVERY = 0x01;
