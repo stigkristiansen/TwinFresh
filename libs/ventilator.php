@@ -41,8 +41,6 @@ class Vent {
     }
 
     public function Speed(int $Speed) {
-        IPS_LogMessage('TwinFresh', 'Inside Vent::Speed()');
-
         switch($Speed) {
             case 1:
                 $value = self::$SPEEDLOW;
@@ -54,15 +52,10 @@ class Vent {
                 $value = self::$SPEEDHIGH;
                 break;
             default:
-                IPS_LogMessage('TwinFresh', 'Inside Vent::Speed(). Invalid value: '.$value);
                 return false;
         }
 
-        IPS_LogMessage('TwinFresh', 'Inside Vent::Speed(). Encoding: '.$value);
-
         $command = self::EncodeValue(self::$RW).self::EncodeValue(self::$SPEED).self::EncodeValue($value);
-
-        IPS_LogMessage('TwinFresh', 'Inside Vent::Speed(). Sending...: ');
         $encodedCommand = $this->Encode($command); 
        
         return $encodedCommand;
