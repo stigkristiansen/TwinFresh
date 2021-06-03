@@ -109,12 +109,12 @@ class Protocol {
         return self::EncodeValue(self::PREFIX).$data.$this->Checksum($data);
     }
 
-    protected function EncodeControllerId(string $ControllerId) {
+    private function EncodeControllerId(string $ControllerId) {
         $size = strlen($ControllerId);
         return chr($size).$ControllerId;
     }
 
-    protected function EncodePassword($Password){
+    private function EncodePassword($Password){
         $size = strlen($Password);
         if($size>0)
             return chr($size).$Password;
