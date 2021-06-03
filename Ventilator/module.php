@@ -37,8 +37,11 @@ class Ventilator extends IPSModule {
 		$this->SetValue(Variables::SPEED_IDENT, 1);
 		$this->EnableAction(Variables::SPEED_IDENT);
 
-		$this->RegisterVariableInteger(Variables::MODE_IDENT, Variables::MODE_TEXT, Profiles::MODE, 3);
+		$mode = $this->RegisterVariableInteger(Variables::MODE_IDENT, Variables::MODE_TEXT, Profiles::MODE, 3);
 		$this->EnableAction(Variables::MODE_IDENT);
+		$this->RegisterTimer(Timers::UPDATE . (string) $this->InstanceID, 0, 'if(IPS_VariableExists(' . (string) $mode . ')) RequestAction(' . (string) $mode . ', 255);'); 
+
+		$this->RegisterMessage(0, IPS_KERNELMESSAGE);
 		
 	}
 
@@ -58,6 +61,10 @@ class Ventilator extends IPSModule {
 	{
 		//Never delete this line!
 		parent::ApplyChanges();
+
+		if (IPS_GetKernelRunlevel() == KR_READY) {
+            $this->SetTimers();
+        }
 	}
 
 	public function RequestAction($Ident, $Value) {
@@ -90,6 +97,18 @@ class Ventilator extends IPSModule {
 		}
 	}
 
+	public function MessageSink($TimeStamp, $SenderID, $Message, $Data) {
+        parent::MessageSink($TimeStamp, $SenderID, $Message, $Data);
+
+        if ($Message == IPS_KERNELMESSAGE && $Data[0] == KR_READY) 
+            $this->SetTimers();
+    }
+
+	private function SetTimers() {
+		$this->SetTimerInterval(Timers::UPDATE . (string) $this->InstanceID, $this->ReadPropertyInteger(Properties::UPDATEINTERVAL)*1000);
+	}
+
+
 	private function Power(bool $State) {
 		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 						
@@ -99,26 +118,18 @@ class Ventilator extends IPSModule {
 			
 			$vent = new Vent($controlId, $password);
 			$data = $vent->Power($State);
-			$arr = str_split($data);
-			foreach($arr as $char) {
-				IPS_LogMessage('TwinFresh', ord($char));	
-			}
 			
 			$this->Send($data, $ipAddress, Udp::PORT);
 		}
 	}
 
 	private function Speed(int $Value) {
-		IPS_LogMessage('TwinFresh', 'Inside Module::Speed()');
-
 		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 						
 		if($this->VerifyDeviceIp($ipAddress)){
 			$controlId = $this->ReadPropertyString(Properties::ID);
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 
-			IPS_LogMessage('TwinFresh', 'IP verified');
-			
 			$vent = new Vent($controlId, $password);
 			$data = $vent->Speed($Value);
 		
@@ -128,8 +139,6 @@ class Ventilator extends IPSModule {
 
 
 	private function Mode(int $Value) {
-		IPS_LogMessage('TwinFresh', 'Inside Module::Mode()');
-
 		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 						
 		if($this->VerifyDeviceIp($ipAddress)){
@@ -143,7 +152,7 @@ class Ventilator extends IPSModule {
 		}
 	}
 
-	public function Refresh() {
+	private function Refresh() {
 		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 						
 		if($this->VerifyDeviceIp($ipAddress)){
@@ -152,13 +161,6 @@ class Ventilator extends IPSModule {
 			
 			$vent = new Vent($controlId, $password);
 			$data = $vent->RefreshStatus();
-
-			/*
-			$arr = str_split($data);
-			foreach($arr as $char) {
-				IPS_LogMessage('TwinFresh', ord($char));	
-			}
-			*/
 		
 			$this->Send($data, $ipAddress, Udp::PORT);
 		}
@@ -214,20 +216,14 @@ class Ventilator extends IPSModule {
 
 		return false;
 	}
-
 	
 	private function Send(string $Text, string $ClientIP, int $ClientPort){
 		$this->SendDataToParent(json_encode(['DataID' => '{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}', "ClientIP" => $ClientIP, "ClientPort" => $ClientPort, "Buffer" => iconv("ISO-8859-1", "UTF-8", $Text)]));
 	}
 
 	public function ReceiveData($JSONString){
-		IPS_LogMessage('TwinFresh','Received data');
 		$data = json_decode($JSONString);
 		$buffer = iconv("UTF-8","ISO-8859-1", $data->Buffer);
-		$arr = str_split($buffer);
-		foreach($arr as $char) {
-			IPS_LogMessage('TwinFresh', ord($char));	
-		}
 
 		$controlId = $this->ReadPropertyString(Properties::ID);
 		$password = $this->ReadPropertyString(Properties::PASSWORD);
@@ -246,8 +242,6 @@ class Ventilator extends IPSModule {
 		$value = $vent->GetMode();
 		if($value!=-1)
 			$this->SetValueEx(Variables::MODE_IDENT, $value);
-		
-	
 	}
 
 	private function SetValueEx(string $Ident, $Value) {
