@@ -11,7 +11,7 @@
             "type" :  "ValidationTextBox" ,  "name" :  "ControlId" ,  "caption" :  "Id", "validate" : "^[A-Za-z0-9]$"
         },
         {
-            "type" :  "TextBox" ,  "name" :  "Password" ,  "caption" :  "Password"
+            "type" :  "PasswordTextBox" ,  "name" :  "Password" ,  "caption" :  "Password"
         },
         {
             "type": "NumberSpinner", "name": "UpdateInterval", "caption": "Interval", "suffix": "seconds"
