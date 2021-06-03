@@ -5,7 +5,7 @@ declare(strict_types=1);
 require_once(__DIR__ . "/../libs/autoload.php");
 
 class Ventilator extends IPSModule {
-	use ProfileHelper;
+	use ProfileHelper, BufferHelper;
 	
 	public function Create(){
 		//Never delete this line!
