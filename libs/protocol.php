@@ -89,7 +89,7 @@ class Protocol {
         }
     }
 
-    protected function Checksum(string $Data) {
+    private function Checksum(string $Data) {
         $arr = str_split($Data);
         $sum = 0;
         
