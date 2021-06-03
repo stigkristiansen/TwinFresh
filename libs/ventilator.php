@@ -48,14 +48,14 @@ class Vent {
             case 2:
                 $value = self::$SPEEDMEDIUM;
                 break;
-            case 2:
+            case 3:
                 $value = self::$SPEEDHIGH;
                 break;
             default:
                 return false;
         }
 
-        $command = self::EncodeValue(self::$RW).self::EncodeValue(self::$SPEED).self::EncodeValue(self::$$value);
+        $command = self::EncodeValue(self::$RW).self::EncodeValue(self::$SPEED).self::EncodeValue($value);
         $encodedCommand = $this->Encode($command); 
        
         return $encodedCommand;
