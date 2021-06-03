@@ -22,11 +22,11 @@ class Ventilator extends IPSModule {
 	public function Refresh() {
 		$vent = new Vent('0022004547415717', '');
 		$data = $vent->RefreshStatus();
-		$arr = str_split($data);
+		/*$arr = str_split($data);
 		foreach($arr as $char) {
 			IPS_LogMessage('TwinFresh', ord($char));	
 		}
-		
+		*/
 		$this->Send($data,'192.168.0.107', 4000);
 	}
 
@@ -38,8 +38,7 @@ class Ventilator extends IPSModule {
 
 	public function Send(string $Text, string $ClientIP, int $ClientPort)
 	{
-		$Text = $data = iconv("ISO-8859-1", "UTF-8", $Text);
-		$this->SendDataToParent(json_encode(['DataID' => '{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}', "ClientIP" => $ClientIP, "ClientPort" => $ClientPort, "Buffer" => $Text]));
+		$this->SendDataToParent(json_encode(['DataID' => '{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}', "ClientIP" => $ClientIP, "ClientPort" => $ClientPort, "Buffer" => iconv("ISO-8859-1", "UTF-8", $Text)]));
 	}
 
 	public function ReceiveData($JSONString)
@@ -51,6 +50,8 @@ class Ventilator extends IPSModule {
 		foreach($arr as $char) {
 			IPS_LogMessage('TwinFresh', ord($char));	
 		}
-		IPS_LogMessage('Device RECV', $data->Buffer . ' - ' . $data->ClientIP . ' - ' . $data->ClientPort);
+		
+
+
 	}
 }
