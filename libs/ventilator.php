@@ -8,9 +8,6 @@ class Vent extends Protocol {
     private $controllerId;
     private $password;
 
-    private $power;
-    private $speed;
-    private $mode;
 
     public function __construct(string $ControllerId, string $Password = '') {
         $this->controllerId = $ControllerId;
@@ -23,7 +20,7 @@ class Vent extends Protocol {
 
     public function RefreshStatus() {
         $command = self::EncodeValue(self::R).self::EncodeValue(self::POWER).self::EncodeValue(self::SPEED).self::EncodeValue(self::MODE);
-        $encodedCommand = $this->Encode($command); 
+        $encodedCommand = $this->Encode($command, $this->controllerId, $this->password); 
         
         return $encodedCommand;
     }
@@ -35,7 +32,7 @@ class Vent extends Protocol {
             $value = self::EncodeValue(self::POWEROFF);
 
         $command = self::EncodeValue(self::RW).self::EncodeValue(self::POWER).$value;
-        $encodedCommand = $this->Encode($command); 
+        $encodedCommand = $this->Encode($command, $this->controllerId, $this->password); 
        
         return $encodedCommand;
     }
@@ -56,7 +53,7 @@ class Vent extends Protocol {
         }
 
         $command = self::EncodeValue(self::RW).self::EncodeValue(self::SPEED).self::EncodeValue($value);
-        $encodedCommand = $this->Encode($command); 
+        $encodedCommand = $this->Encode($command, $this->controllerId, $this->password); 
        
         return $encodedCommand;
     }
@@ -77,21 +74,10 @@ class Vent extends Protocol {
         }
 
         $command = self::EncodeValue(self::RW).self::EncodeValue(self::MODE).self::EncodeValue($value);
-        $encodedCommand = $this->Encode($command); 
+        $encodedCommand = $this->Encode($command, $this->controllerId, $this->password); 
        
         return $encodedCommand;
     }
 
-    public function GetMode() {
-        return $this->mode;
-    }
 
-    public function GetSpeed(){
-        return $this->speed;
-    }
-
-    public function GetPower() {
-        return $this->power;
-    }
-    
 }

@@ -24,6 +24,11 @@ class Protocol {
     const RESPONSE = 0x06;
     const UNINITIZIALIZED = -1;
 
+    private $power;
+    private $speed;
+    private $mode;
+
+
     public function Decode(string $Data) {
         $prefix = substr($Data, 0, 2);
        
@@ -94,21 +99,34 @@ class Protocol {
         return chr($low).chr($high);
     }
 
-    protected function Encode($Data){
-        $data = self::EncodeValue(self::TYPE).$this->EncodeControllerId().$this->EncodePassword().$Data;
+    protected function Encode(string $Data, string $ControllerId, string $Password){
+        $data = self::EncodeValue(self::TYPE).$this->EncodeControllerId($ControllerId).$this->EncodePassword($Password).$Data;
         return self::EncodeValue(self::PREFIX).$data.$this->Checksum($data);
     }
 
-    protected function EncodeControllerId() {
-        $size = strlen($this->controllerId);
-        return chr($size).$this->controllerId;
+    protected function EncodeControllerId(string $ControllerId) {
+        $size = strlen($ControllerId);
+        return chr($size).$ControllerId;
     }
 
-    protected function EncodePassword(){
-        $size = strlen($this->password);
+    protected function EncodePassword($Password){
+        $size = strlen($Password);
         if($size>0)
-            return chr($size).$this->password;
+            return chr($size).$Password;
         else
             return chr(0x00);
     }
+
+    public function GetMode() {
+        return $this->mode;
+    }
+
+    public function GetSpeed(){
+        return $this->speed;
+    }
+
+    public function GetPower() {
+        return $this->power;
+    }
+    
 }
