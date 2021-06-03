@@ -61,19 +61,19 @@ class Ventilator extends IPSModule {
 	}
 
 	public function RequestAction($Ident, $Value) {
-		// $this->LogMessage("RequestAction: ".$Ident.":".$Value, KL_MESSAGE);
+		$this->LogMessage("RequestAction: ".$Ident.":".$Value, KL_MESSAGE);
 
 		try {
 			switch ($Ident) {
-				case Variables::POWER:
+				case Variables::POWER_IDENT:
 					$this->Power($Value);
 					break;
-				case Variables::SPEED:
+				case Variables::SPEED_IDENT:
 					if($this->GetValue(Variables::POWER_IDENT)) {   // Don't care if the device is off
 						$this->Speed($Value);
 					}
 					break;
-				case Variables::MODE:
+				case Variables::MODE_IDENT:
 					if($Value>200) { // Values above 200 is used inside scheduled scripts and Form Actions
 						switch($Value) {
 							case 255: // Call Update();
