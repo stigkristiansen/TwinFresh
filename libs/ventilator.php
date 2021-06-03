@@ -34,7 +34,7 @@ class Vent {
         else
             $value = self::EncodeValue(self::$POWEROFF);
 
-        $command = self::EncodeValue(self::$W).self::EncodeValue(self::$POWER).$value;
+        $command = self::EncodeValue(self::$RW).self::EncodeValue(self::$POWER).$value;
         $encodedCommand = $this->Encode($command); 
        
         return $encodedCommand;
@@ -55,7 +55,7 @@ class Vent {
                 return false;
         }
 
-        $command = self::EncodeValue(self::$W).self::EncodeValue(self::$SPEED).self::EncodeValue(self::$$value);
+        $command = self::EncodeValue(self::$RW).self::EncodeValue(self::$SPEED).self::EncodeValue(self::$$value);
         $encodedCommand = $this->Encode($command); 
        
         return $encodedCommand;
@@ -76,7 +76,7 @@ class Vent {
                 return false;
         }
 
-        $command = self::EncodeValue(self::$W).self::EncodeValue(self::$MODE).self::EncodeValue($value);
+        $command = self::EncodeValue(self::$RW).self::EncodeValue(self::$MODE).self::EncodeValue($value);
         $encodedCommand = $this->Encode($command); 
        
         return $encodedCommand;

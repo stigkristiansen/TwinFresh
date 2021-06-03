@@ -218,6 +218,31 @@ class Ventilator extends IPSModule {
 		foreach($arr as $char) {
 			IPS_LogMessage('TwinFresh', ord($char));	
 		}
+
+		$controlId = $this->ReadPropertyString(Properties::ID);
+		$password = $this->ReadPropertyString(Properties::PASSWORD);
+			
+		$vent = new Vent($controlId, $password);
+		$vent->Decode($buffer);
+
+		$value = $vent->GetPower();
+		if($value!=-1)
+			$this->SetValueEx(Variables::POWER_IDENT, $value);
+		
+		$value = $vent->GetSpeed();
+		if($value!=-1)
+			$this->SetValueEx(Variables::SPEED_IDENT, $value);
+
+		$value = $vent->GetPower();
+		if($value!=-1)
+			$this->SetValueEx(Variables::Mode_IDENT, $value);
+		
 	
+	}
+
+	private function SetValueEx(string $Ident, $Value) {
+		$oldValue = $this->GetValue($Ident);
+		if($oldValue!=$Value)
+			$this->SetValue($Ident, $Value);
 	}
 }
