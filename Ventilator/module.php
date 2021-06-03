@@ -109,6 +109,8 @@ class Ventilator extends IPSModule {
 	}
 
 	private function Speed(int $Value) {
+		IPS_LogMessage('TwinFresh', 'Inside Module::Speed()');
+
 		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 						
 		if($this->VerifyDeviceIp($ipAddress)){
@@ -124,6 +126,8 @@ class Ventilator extends IPSModule {
 
 
 	private function Mode(int $Value) {
+		IPS_LogMessage('TwinFresh', 'Inside Module::Mode()');
+
 		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 						
 		if($this->VerifyDeviceIp($ipAddress)){
@@ -131,7 +135,7 @@ class Ventilator extends IPSModule {
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 			
 			$vent = new Vent($controlId, $password);
-			$data = $vent->Power($Value);
+			$data = $vent->Mode($Value);
 		
 			$this->Send($data, $ipAddress, Udp::PORT);
 		}
@@ -237,7 +241,7 @@ class Ventilator extends IPSModule {
 		if($value!=-1)
 			$this->SetValueEx(Variables::SPEED_IDENT, $value);
 
-		$value = $vent->GetPower();
+		$value = $vent->GetMode();
 		if($value!=-1)
 			$this->SetValueEx(Variables::MODE_IDENT, $value);
 		
