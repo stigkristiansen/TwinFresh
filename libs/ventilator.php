@@ -27,10 +27,12 @@ class Vent extends Protocol {
         else
             $value = self::EncodeValue(self::POWEROFF);
 
-        $command = self::EncodeValue(self::RW).self::EncodeValue(self::POWER).$value;
+        /*$command = self::EncodeValue(self::RW).self::EncodeValue(self::POWER).$value;
         $encodedCommand = $this->Encode($command, $this->controllerId, $this->password); 
        
-        return $encodedCommand;
+        return $encodedCommand;*/
+
+        return self::EncodePower($value);
     }
 
     public function Speed(int $Speed) {
