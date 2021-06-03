@@ -53,6 +53,7 @@ class Vent {
                 $value = self::$SPEEDHIGH;
                 break;
             default:
+                IPS_LogMessage('TwinFresh', 'Inside Vent::Speed(). Invalid value: '.$value);
                 return false;
         }
 
