@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-class Vent {
-    use Protocol;
+class Vent extends Protocol {
+    //use Protocol;
     
     private $controllerId;
     private $password;

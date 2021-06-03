@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-trait Protocol {
+class Protocol {
     static $PREFIX = 0xfd;
     static $TYPE = 0x02;
     static $R = 0x01;
