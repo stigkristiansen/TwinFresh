@@ -239,7 +239,7 @@ class Ventilator extends IPSModule {
 
 		$value = $vent->GetPower();
 		if($value!=-1)
-			$this->SetValueEx(Variables::Mode_IDENT, $value);
+			$this->SetValueEx(Variables::MODE_IDENT, $value);
 		
 	
 	}
