@@ -104,15 +104,13 @@ class Protocol {
                         $this->humidity = ord($parameters[$i]);
                         break;
                 case self::SPECIALFE:
+                        $size = ord($parameters[$i+1]) 
                         $i+=2;
                         switch(ord($parameters[$i])) {
                             case self::FILTERCOUNTDOWN:
-                                $i++;
-                                $this->filterCountdown = (string )ord($parameters[$i+2]) . 'd:' . (string)ord($parameters[$i+1]). 'h:' . (string)ord($parameters[$i]).'m';
-                                $i+=2;
+                                $this->filterCountdown = (string )ord($parameters[$i+3]) . 'd:' . (string)ord($parameters[$i+2]). 'h:' . (string)ord($parameters[$i+1]).'m';
+                                $i+=size;
                         }
-                default:
-                    return false;
            }
         }
         
