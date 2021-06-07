@@ -56,7 +56,7 @@ class Protocol {
         return $this->humidity;
     }
 
-    public GetFilterCountdown() {
+    public function GetFilterCountdown() {
         return $this->filterCountdown;
     }
 
