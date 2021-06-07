@@ -111,7 +111,7 @@ class Protocol {
                                 $this->filterCountdown = (string )ord($parameters[$i+3]) . 'd:' . (string)ord($parameters[$i+2]). 'h:' . (string)ord($parameters[$i+1]).'m';
                                 break;
                         }
-                        $i+=size;
+                        $i+=$size;
                         break;
            }
         }
