@@ -51,6 +51,8 @@ class Variables {
     const SPEED_TEXT = 'Speed';
     const MODE_IDENT = 'Mode';
     const MODE_TEXT = 'Mode';
+    const HUMIDITY_IDENT = 'Humidity';
+    const HUMIDITY_Text = 'Humidity';
 }
 
 class Buffers {

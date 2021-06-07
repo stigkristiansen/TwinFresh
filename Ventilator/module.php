@@ -41,6 +41,10 @@ class Ventilator extends IPSModule {
 		$this->EnableAction(Variables::MODE_IDENT);
 		$this->RegisterTimer(Timers::UPDATE . (string) $this->InstanceID, 0, 'if(IPS_VariableExists(' . (string) $mode . ')) RequestAction(' . (string) $mode . ', 255);'); 
 
+		$this->RegisterVariableInteger(Variables::HUMIDITY_IDENT, Variables::HUMIDITY_TEXT, '~Humidity', 4);
+		$this->SetValue(Variables::SPEED_IDENT, 1);
+		$this->EnableAction(Variables::SPEED_IDENT);
+
 		$this->RegisterMessage(0, IPS_KERNELMESSAGE);
 		
 	}
@@ -63,7 +67,7 @@ class Ventilator extends IPSModule {
 		parent::ApplyChanges();
 
 		if (IPS_GetKernelRunlevel() == KR_READY) {
-            $this->SetTimers();
+            $this->SetTimer();
         }
 	}
 
@@ -97,10 +101,10 @@ class Ventilator extends IPSModule {
         parent::MessageSink($TimeStamp, $SenderID, $Message, $Data);
 
         if ($Message == IPS_KERNELMESSAGE && $Data[0] == KR_READY) 
-            $this->SetTimers();
+            $this->SetTimer();
     }
 
-	private function SetTimers() {
+	private function SetTimer() {
 		$this->SetTimerInterval(Timers::UPDATE . (string) $this->InstanceID, $this->ReadPropertyInteger(Properties::UPDATEINTERVAL)*1000);
 	}
 
@@ -236,6 +240,10 @@ class Ventilator extends IPSModule {
 		$value = $vent->GetMode();
 		if($value!=-1)
 			$this->SetValueEx(Variables::MODE_IDENT, $value);
+
+		$value = $vent->GetHumidity();
+		if($value!=-1)
+			$this->SetValueEx(Variables::HUMIDITY_IDENT, $value);
 	}
 
 	private function SetValueEx(string $Ident, $Value) {

@@ -21,17 +21,20 @@ class Protocol {
     protected const MODEVENTILATION = 0x00;
     protected const MODERECOVERY = 0x01;
     protected const MODESUPPLY = 0x02;
+    protected const HUMIDITY = 0x25;
     protected const RESPONSE = 0x06;
     protected const UNINITIZIALIZED = -1;
 
     private $power;
     private $speed;
     private $mode;
+    private $humidity;
 
     public function __construct() {
         $this->power = self::UNINITIZIALIZED;
         $this->speed = self::UNINITIZIALIZED;
         $this->mode = self::UNINITIZIALIZED;
+        $this->humidity = self::UNINITIZIALIZED;
     }
 
     public function GetMode() {
@@ -44,6 +47,10 @@ class Protocol {
 
     public function GetPower() {
         return $this->power;
+    }
+
+    public function GetHumidity() {
+        return $this->humidity;
     }
 
     public function Decode(string $Data) {
@@ -84,6 +91,10 @@ class Protocol {
                     $i++;
                     $this->mode = ord($parameters[$i]);
                     break;
+                case self::HUMIDITY:
+                        $i++;
+                        $this->humidity = ord($parameters[$i]);
+                        break;
                 default:
                     return false;
            }
