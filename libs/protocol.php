@@ -24,6 +24,7 @@ class Protocol {
     protected const HUMIDITY = 0x25;
     protected const RESPONSE = 0x06;
     protected const FILTERCOUNTDOWN = 0x64;
+    protected const SPECIALFE = 0xFE;
     protected const UNINITIZIALIZED = -1;
 
     private $power;
@@ -102,10 +103,14 @@ class Protocol {
                         $i++;
                         $this->humidity = ord($parameters[$i]);
                         break;
-                case self::FILTERCOUNTDOWN:
-                        $i++;
-                        $this->filterCountdown = (string )ord($parameters[$i]+2) . ':' . (string)ord($parameters[$i]+1). ':' . (string)ord($parameters[$i]);
+                case self::SPECIALFE:
                         $i+=2;
+                        switch(ord($parameters[$i])) {
+                            case self::FILTERCOUNTDOWN:
+                                $i++;
+                                $this->filterCountdown = (string )ord($parameters[$i]+2) . ':' . (string)ord($parameters[$i]+1). ':' . (string)ord($parameters[$i]);
+                                $i+=2;
+                        }
                 default:
                     return false;
            }
