@@ -108,7 +108,7 @@ class Protocol {
                         switch(ord($parameters[$i])) {
                             case self::FILTERCOUNTDOWN:
                                 $i++;
-                                $this->filterCountdown = (string )ord($parameters[$i+2]) . ':' . (string)ord($parameters[$i+1]). ':' . (string)ord($parameters[$i]);
+                                $this->filterCountdown = (string )ord($parameters[$i+2]) . 'd:' . (string)ord($parameters[$i+1]). 'h:' . (string)ord($parameters[$i]).'m';
                                 $i+=2;
                         }
                 default:
