@@ -104,7 +104,7 @@ class Protocol {
                         break;
                 case self::FILTERCOUNTDOWN:
                         $i++;
-                        $this->filterCountdown = (string )ord($parameters[$i]+2) . ':' . (string)ord($parameters[$i]+1). ':' . >(string)ord($parameters[$i]);
+                        $this->filterCountdown = (string )ord($parameters[$i]+2) . ':' . (string)ord($parameters[$i]+1). ':' . (string)ord($parameters[$i]);
                         $i+=2;
                 default:
                     return false;
