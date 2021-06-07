@@ -109,8 +109,10 @@ class Protocol {
                         switch(ord($parameters[$i])) {
                             case self::FILTERCOUNTDOWN:
                                 $this->filterCountdown = (string )ord($parameters[$i+3]) . 'd:' . (string)ord($parameters[$i+2]). 'h:' . (string)ord($parameters[$i+1]).'m';
-                                $i+=size;
+                                break;
                         }
+                        $i+=size;
+                        break;
            }
         }
         
