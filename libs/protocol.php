@@ -104,7 +104,7 @@ class Protocol {
                         $this->humidity = ord($parameters[$i]);
                         break;
                 case self::SPECIALFE:
-                        $size = ord($parameters[$i+1]) 
+                        $size = ord($parameters[$i+1]); 
                         $i+=2;
                         switch(ord($parameters[$i])) {
                             case self::FILTERCOUNTDOWN:
