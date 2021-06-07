@@ -52,7 +52,7 @@ class Variables {
     const MODE_IDENT = 'Mode';
     const MODE_TEXT = 'Mode';
     const HUMIDITY_IDENT = 'Humidity';
-    const HUMIDITY_Text = 'Humidity';
+    const HUMIDITY_TEXT = 'Humidity';
 }
 
 class Buffers {
