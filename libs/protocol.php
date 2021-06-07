@@ -57,7 +57,7 @@ class Protocol {
     }
 
     public GetFilterCountdown() {
-        return this->filterCountdown;
+        return $this->filterCountdown;
     }
 
     public function Decode(string $Data) {
