@@ -42,6 +42,8 @@ class Ventilator extends IPSModule {
 		$this->RegisterTimer(Timers::UPDATE . (string) $this->InstanceID, 0, 'if(IPS_VariableExists(' . (string) $mode . ')) RequestAction(' . (string) $mode . ', 255);'); 
 
 		$this->RegisterVariableInteger(Variables::HUMIDITY_IDENT, Variables::HUMIDITY_TEXT, '~Humidity', 4);
+
+		$this->RegisterVariableString(Variables::FILTER_IDENT, Variables::FILTER_TEXT, '', 5);
 		
 		$this->RegisterMessage(0, IPS_KERNELMESSAGE);
 		
@@ -242,6 +244,10 @@ class Ventilator extends IPSModule {
 		$value = $vent->GetHumidity();
 		if($value!=-1)
 			$this->SetValueEx(Variables::HUMIDITY_IDENT, $value);
+
+		$value = $vent->GetFilterCountdown();
+		if($value!='')
+			$this->SetValueEx(Variables::FILTER_IDENT, $value);
 	}
 
 	private function SetValueEx(string $Ident, $Value) {

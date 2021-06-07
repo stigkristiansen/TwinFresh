@@ -53,6 +53,8 @@ class Variables {
     const MODE_TEXT = 'Mode';
     const HUMIDITY_IDENT = 'Humidity';
     const HUMIDITY_TEXT = 'Humidity';
+    const FILTER_IDENT = 'FilterCountdown';
+    const FILTER_TEXT = 'Filter Countdown';
 }
 
 class Buffers {

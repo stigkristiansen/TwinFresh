@@ -23,18 +23,21 @@ class Protocol {
     protected const MODESUPPLY = 0x02;
     protected const HUMIDITY = 0x25;
     protected const RESPONSE = 0x06;
+    protected const FILTERCOUNTDOWN = 0x64;
     protected const UNINITIZIALIZED = -1;
 
     private $power;
     private $speed;
     private $mode;
     private $humidity;
+    private $filterCountdown;
 
     public function __construct() {
         $this->power = self::UNINITIZIALIZED;
         $this->speed = self::UNINITIZIALIZED;
         $this->mode = self::UNINITIZIALIZED;
         $this->humidity = self::UNINITIZIALIZED;
+        $this->filterCountdown = '';
     }
 
     public function GetMode() {
@@ -51,6 +54,10 @@ class Protocol {
 
     public function GetHumidity() {
         return $this->humidity;
+    }
+
+    public GetFilterCountdown() {
+        return this->filterCountdown;
     }
 
     public function Decode(string $Data) {
@@ -95,6 +102,10 @@ class Protocol {
                         $i++;
                         $this->humidity = ord($parameters[$i]);
                         break;
+                case self::FILTERCOUNTDOWN:
+                        $i++;
+                        $this->filterCountdown = (string )ord($parameters[$i]+2) . ':' . (string)ord($parameters[$i]+1). ':' . >(string)ord($parameters[$i]);
+                        $i+=2;
                 default:
                     return false;
            }
