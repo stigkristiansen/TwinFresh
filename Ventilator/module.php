@@ -30,6 +30,11 @@ class Ventilator extends IPSModule {
 			[Mode::SUPPLY, Mode::SUPPLY_TEXT, '', -1]
 		]);
 
+		$this->RegisterProfileBooleanEx(Profiles::BOOST, Profiles::BOOST_ICON, '', '', [
+			[BOOST::ENABLED, Mode::ENABLED_TEXT, '', -1],
+			[BOOST::DISABLED, Mode::DISABLED_TEXT, '', -1]
+		]);
+
 		$this->RegisterVariableBoolean(Variables::POWER_IDENT, Variables::POWER_TEXT, '~Switch', 1);
 		$this->EnableAction(Variables::POWER_IDENT);
 
@@ -47,7 +52,7 @@ class Ventilator extends IPSModule {
 
 		$this->RegisterVariableString(Variables::TOTALTIME_IDENT, Variables::TOTALTIME_TEXT, '', 6);
 
-		$this->RegisterVariableBoolean(Variables::BOOSTMODE_IDENT, Variables::BOOSTMODE_TEXT, '', 7);
+		$this->RegisterVariableBoolean(Variables::BOOSTMODE_IDENT, Variables::BOOSTMODE_TEXT, Profiles::BOOST, 7);
 		
 		$this->RegisterMessage(0, IPS_KERNELMESSAGE);
 		

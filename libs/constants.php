@@ -24,6 +24,15 @@ class Profiles {
     const SPEED_ICON = 'Intensity';
     const MODE = 'TwinFresh.Mode';
     const MODE_ICON = 'Ventilation';
+    const BOOST = 'TwinFresh.Boost';
+    const BOOST_ICON = 'Rocket';
+}
+
+class Boost {
+    const ENABLED = true;
+    const ENABLED_Text = 'On';
+    const DISABLED = false;
+    const DISABLED_TEXT = 'Off';
 }
 
 class Speed {
