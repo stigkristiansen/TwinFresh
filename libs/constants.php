@@ -34,7 +34,7 @@ class Boost {
     const ACTIVE = true;
     const ACTIVE_TEXT = 'On';
     const INACTIVE = false;
-    const INACTIVE_TEXT = 'Off';
+    const INACTIVE_TEXT = 'Off'; 
 }
 
 class ReplaceFilter {
