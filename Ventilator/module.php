@@ -31,9 +31,15 @@ class Ventilator extends IPSModule {
 		]);
 
 		$this->RegisterProfileBooleanEx(Profiles::BOOST, Profiles::BOOST_ICON, '', '', [
-			[BOOST::ENABLED, BOOST::ENABLED_TEXT, '', -1],
-			[BOOST::DISABLED, BOOST::DISABLED_TEXT, '', -1]
+			[true, 'On', '', -1],
+			[false, 'Off', '', -1]
 		]);
+
+		//$this->RegisterProfileBooleanEx(Profiles::MUTE, Profiles::MUTE_ICON, '', '', [
+		//	[true, 'Muted', '', -1],
+		//	[false, 'Unmuted', '', -1]
+		//]);
+			
 
 		$this->RegisterVariableBoolean(Variables::POWER_IDENT, Variables::POWER_TEXT, '~Switch', 1);
 		$this->EnableAction(Variables::POWER_IDENT);
