@@ -111,8 +111,10 @@ class Protocol {
                         $this->humidity = ord($parameters[$i]);
                         break;
                 case self::SPECIALFE:
+                        IPS_LogMessage('TwinFresh','Spesial: '. ord($parameters[$i]));
                         $size = ord($parameters[$i+1]); 
                         $i+=2;
+                        IPS_LogMessage('TwinFresh','Handling: '. ord($parameters[$i]));
                         switch(ord($parameters[$i])) {
                             case self::FILTERCOUNTDOWN:
                                 $this->filterCountdown = (string )ord($parameters[$i+3]) . 'd:' . (string)ord($parameters[$i+2]). 'h:' . (string)ord($parameters[$i+1]).'m';
