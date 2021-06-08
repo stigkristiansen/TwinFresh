@@ -30,11 +30,13 @@ class Ventilator extends IPSModule {
 			[Mode::SUPPLY, Mode::SUPPLY_TEXT, '', -1]
 		]);
 
+		IPS_LogMessage('TwinFresh','Registering Boost...');
 		$this->RegisterProfileBooleanEx(Profiles::BOOST, Profiles::BOOST_ICON, '', '', [
 			[Boost::ACTIVE, Boost::ACTIVE_TEXT, '', -1],
-			[Boost::INACTIVE, Boost::INACTIVE, '', -1]
+			[Boost::INACTIVE, Boost::INACTIVE_TEXT, '', -1]
 		]);
 
+		IPS_LogMessage('TwinFresh','Registering ReplaceFilter');
 		$this->RegisterProfileBooleanEx(Profiles::REPLACEFILTER, Profiles::REPLACEFILTER_ICON, '', '', [
 			[ReplaceFilter::REPLACE, ReplaceFilter::REPLACE_TEXT, '', -1],
 			[ReplaceFilter::OK, ReplaceFilter::OK_TEXT, '', -1]
