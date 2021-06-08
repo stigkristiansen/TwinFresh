@@ -27,7 +27,7 @@ class Profiles {
     const BOOST = 'TwinFresh.Boost';
     const BOOST_ICON = 'Rocket';
     const REPLACEFILTER = 'TwinFresh.Filter';
-    const REPLACEFILTER = 'Warning';
+    const REPLACEFILTER_ICON = 'Warning';
 }
 
 class Boost {
