@@ -45,9 +45,9 @@ class Ventilator extends IPSModule {
 
 		$this->RegisterVariableString(Variables::FILTER_IDENT, Variables::FILTER_TEXT, '', 5);
 
-		$this->RegisterVariableString(Variables::TOTALTIME_IDENT, Variables::TOTALTIME_TEXT, '', 5);
+		$this->RegisterVariableString(Variables::TOTALTIME_IDENT, Variables::TOTALTIME_TEXT, '', 6);
 
-		$this->RegisterVariableBoolean(Variables::BOOSTMODE_IDENT, Variables::BOOSTMODE_TEXT, '', 6);
+		$this->RegisterVariableBoolean(Variables::BOOSTMODE_IDENT, Variables::BOOSTMODE_TEXT, '', 7);
 		
 		$this->RegisterMessage(0, IPS_KERNELMESSAGE);
 		
