@@ -36,8 +36,8 @@ class Ventilator extends IPSModule {
 		]);
 
 		$this->RegisterProfileBooleanEx(Profiles::REPLACEFILTER, Profiles::REPLACEFILTER_ICON, '', '', [
-			[true, 'Replace', '', -1],
-			[false, 'Ok', '', -1]
+			[ReplaceFilter::REPLACE, ReplaceFilter::REPLACE_TEXT, '', -1],
+			[ReplaceFilter::OK, ReplaceFilter::OK_TEXT, '', -1]
 		]);
 
 		/*
