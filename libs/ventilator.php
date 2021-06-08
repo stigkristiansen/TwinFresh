@@ -14,7 +14,7 @@ class Vent extends Protocol {
     }
 
     public function RefreshStatus() {
-        $command = self::EncodeValue(self::R).self::EncodeValue(self::POWER).self::EncodeValue(self::SPEED).self::EncodeValue(self::MODE).self::EncodeValue(self::HUMIDITY).self::EncodeValue(self::BOOSTMODE).self::EncodeValue(self::FILTERCOUNTDOWN).self::EncodeValue(self::TOTALTIME);
+        $command = self::EncodeValue(self::R).self::EncodeValue(self::POWER).self::EncodeValue(self::SPEED).self::EncodeValue(self::MODE).self::EncodeValue(self::HUMIDITY).self::EncodeValue(self::BOOSTMODE).self::EncodeValue(self::FILTERREPLACEMENT).self::EncodeValue(self::FILTERCOUNTDOWN).self::EncodeValue(self::TOTALTIME);
         $message = $this->Encode($command, $this->controllerId, $this->password); 
 
         return $message;

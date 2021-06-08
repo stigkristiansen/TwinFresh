@@ -31,15 +31,14 @@ class Ventilator extends IPSModule {
 		]);
 
 		$this->RegisterProfileBooleanEx(Profiles::BOOST, Profiles::BOOST_ICON, '', '', [
-			[true, 'On', '', -1],
-			[false, 'Off', '', -1]
+			[Boost::ACTIVE, Boost::ACTIVE_TEXT, '', -1],
+			[Boost::INACTIVE, Boost::INACTIVE, '', -1]
 		]);
 
-		//$this->RegisterProfileBooleanEx(Profiles::MUTE, Profiles::MUTE_ICON, '', '', [
-		//	[true, 'Muted', '', -1],
-		//	[false, 'Unmuted', '', -1]
-		//]);
-			
+		$this->RegisterProfileBooleanEx(Profiles::PLACEFILTERRE, Profiles::REPLACEFILTER_ICON, '', '', [
+			[ReplaceFilter::REPLACE, ReplaceFilter::REPLACE_TEXT, '', -1],
+			[ReplaceFilter::OK, ReplaceFilter::OK_TEXT, '', -1]
+		]);
 
 		$this->RegisterVariableBoolean(Variables::POWER_IDENT, Variables::POWER_TEXT, '~Switch', 1);
 		$this->EnableAction(Variables::POWER_IDENT);
@@ -56,9 +55,11 @@ class Ventilator extends IPSModule {
 
 		$this->RegisterVariableString(Variables::FILTER_IDENT, Variables::FILTER_TEXT, '', 5);
 
-		$this->RegisterVariableString(Variables::TOTALTIME_IDENT, Variables::TOTALTIME_TEXT, '', 6);
+		$this->RegisterVariableBoolean(Variables::REPLACEFILTER_IDENT, Variables::REPLACEFILTER_TEXT, Profiles::REPLACEFILTER, 6);
 
-		$this->RegisterVariableBoolean(Variables::BOOSTMODE_IDENT, Variables::BOOSTMODE_TEXT, Profiles::BOOST, 7);
+		$this->RegisterVariableString(Variables::TOTALTIME_IDENT, Variables::TOTALTIME_TEXT, '', 7);
+
+		$this->RegisterVariableBoolean(Variables::BOOSTMODE_IDENT, Variables::BOOSTMODE_TEXT, Profiles::BOOST, 8);
 		
 		$this->RegisterMessage(0, IPS_KERNELMESSAGE);
 		
@@ -272,6 +273,10 @@ class Ventilator extends IPSModule {
 		$value = $vent->GetFilterCountdown();
 		if($value!='')
 			$this->SetValueEx(Variables::FILTER_IDENT, $value);
+
+		$value = $vent->GetFilterReplacement();
+		if($value!=-1)
+			$this->SetValueEx(Variables::FILTERREPLACE_IDENT, $value);
 
 		$value = $vent->GetTotalTime();
 		if($value!='')

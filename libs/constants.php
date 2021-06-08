@@ -26,13 +26,22 @@ class Profiles {
     const MODE_ICON = 'Ventilation';
     const BOOST = 'TwinFresh.Boost';
     const BOOST_ICON = 'Rocket';
+    const REPLACEFILTER = 'TwinFresh.Filter';
+    const REPLACEFILTER = 'Warning';
 }
 
 class Boost {
     const ACTIVE = true;
-    const ACTIVE_Text = 'On';
+    const ACTIVE_TEXT = 'On';
     const INACTIVE = false;
     const INACTIVE_TEXT = 'Off';
+}
+
+class ReplaceFilter {
+    const REPLACE = true;
+    const REPLACE_TEXT = 'Replace';
+    const OK = false;
+    const OK_TEXT = 'Ok';
 }
 
 class Speed {
@@ -64,6 +73,8 @@ class Variables {
     const HUMIDITY_TEXT = 'Humidity';
     const FILTER_IDENT = 'FilterCountdown';
     const FILTER_TEXT = 'Filter Countdown';
+    const FILTERREPLACE_IDENT = 'ReplaceFilter';
+    const FILTERREPLACE_TEXT = 'Replace filter';
     const TOTALTIME_IDENT = 'TotalTime';
     const TOTALTIME_TEXT = 'Total Time';
     const BOOSTMODE_IDENT = 'BoostMode';

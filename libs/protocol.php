@@ -25,9 +25,11 @@ class Protocol {
     protected const BOOSTMODE = 0x06;
     protected const RESPONSE = 0x06;
     protected const FILTERCOUNTDOWN = 0x64;
+    protected const FILTERREPLACEMENT = 0x88;
     protected const TOTALTIME = 0x7e;
     protected const SPECIALFE = 0xFE;
     protected const UNINITIZIALIZED = -1;
+    protected const EMPTY = '';
 
     private $power;
     private $speed;
@@ -36,6 +38,7 @@ class Protocol {
     private $filterCountdown;
     private $totalTime;
     private $boostMode;
+    private $filterReplacement;
 
     public function __construct() {
         $this->power = self::UNINITIZIALIZED;
@@ -43,8 +46,9 @@ class Protocol {
         $this->mode = self::UNINITIZIALIZED;
         $this->humidity = self::UNINITIZIALIZED;
         $this->boostMode = self::UNINITIZIALIZED;
-        $this->filterCountdown = '';
-        $this->totalTime = '';
+        $this->filterReplacement = self::UNINITIZIALIZED;
+        $this->filterCountdown = self::EMPTY;
+        $this->totalTime = self::EMPTY;
     }
 
     public function GetMode() {
@@ -70,6 +74,11 @@ class Protocol {
     public function GetTotalTime() {
         return $this->totalTime;
     }
+
+    public function GetFiltereplacement() {
+        return $this->filterReplacement;
+    }
+
 
     public function GetBoostMode() {
         return $this->boostMode;
@@ -122,6 +131,10 @@ class Protocol {
                 case self::BOOSTMODE:
                     $i++;
                     $this->boostMode = ord($parameters[$i]);
+                    break;
+                case self::FILTERREPLACEMENT:
+                    $i++;
+                    $this->filterReplacement = ord($parameters[$i]);
                     break;
                 case self::SPECIALFE:
                         $size = ord($parameters[$i+1]); 
