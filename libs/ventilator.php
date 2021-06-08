@@ -21,7 +21,7 @@ class Vent extends Protocol {
         $arr = str_split($message);
 
         for ($i=0;$i<sizeof($arr);$i++) {
-            IPS_LogMessage('TwinFresh', ord(arr[$i]));
+            IPS_LogMessage('TwinFresh', ord($arr[$i]));
         }
         
         return $message;
