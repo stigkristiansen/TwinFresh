@@ -75,7 +75,7 @@ class Protocol {
         return $this->totalTime;
     }
 
-    public function GetFiltereplacement() {
+    public function GetFilterReplacement() {
         return $this->filterReplacement;
     }
 
