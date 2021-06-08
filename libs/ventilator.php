@@ -18,12 +18,6 @@ class Vent extends Protocol {
         $command = self::EncodeValue(self::R).self::EncodeValue(self::POWER).self::EncodeValue(self::SPEED).self::EncodeValue(self::MODE).self::EncodeValue(self::HUMIDITY).self::EncodeValue(self::FILTERCOUNTDOWN).self::EncodeValue(self::TOTALTIME);
         $message = $this->Encode($command, $this->controllerId, $this->password); 
 
-        $arr = str_split($message);
-
-        for ($i=0;$i<sizeof($arr);$i++) {
-            IPS_LogMessage('TwinFresh', ord($arr[$i]));
-        }
-        
         return $message;
     }
 

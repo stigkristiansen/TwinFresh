@@ -218,6 +218,13 @@ class Ventilator extends IPSModule {
 	}
 	
 	private function Send(string $Text, string $ClientIP, int $ClientPort){
+		
+		$arr = str_split($Text);
+
+        for ($i=0;$i<sizeof($arr);$i++) {
+            IPS_LogMessage('TwinFresh', ord($arr[$i]));
+        }
+
 		$this->SendDataToParent(json_encode(['DataID' => '{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}', "ClientIP" => $ClientIP, "ClientPort" => $ClientPort, "Buffer" => iconv("ISO-8859-1", "UTF-8", $Text)]));
 	}
 
