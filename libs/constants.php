@@ -30,20 +30,6 @@ class Profiles {
     const REPLACEFILTER_ICON = 'Warning';
 }
 
-class Boost {
-    const ACTIVE = true;
-    const ACTIVE_TEXT = 'On';
-    const INACTIVE = false;
-    const INACTIVE_TEXT = 'Off'; 
-}
-
-class ReplaceFilter {
-    const REPLACE = true;
-    const REPLACE_TEXT = 'Replace';
-    const OK = false;
-    const OK_TEXT = 'Ok';
-}
-
 class Speed {
     const LOW = 1;
     const LOW_TEXT = 'Low';
