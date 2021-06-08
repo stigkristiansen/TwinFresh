@@ -24,6 +24,7 @@ class Protocol {
     protected const HUMIDITY = 0x25;
     protected const RESPONSE = 0x06;
     protected const FILTERCOUNTDOWN = 0x64;
+    protected const TOTALTIME = 0x7e;
     protected const SPECIALFE = 0xFE;
     protected const UNINITIZIALIZED = -1;
 
@@ -32,6 +33,7 @@ class Protocol {
     private $mode;
     private $humidity;
     private $filterCountdown;
+    private $totalTime;
 
     public function __construct() {
         $this->power = self::UNINITIZIALIZED;
@@ -39,6 +41,7 @@ class Protocol {
         $this->mode = self::UNINITIZIALIZED;
         $this->humidity = self::UNINITIZIALIZED;
         $this->filterCountdown = '';
+        $this->$totalTime = '';
     }
 
     public function GetMode() {
@@ -59,6 +62,10 @@ class Protocol {
 
     public function GetFilterCountdown() {
         return $this->filterCountdown;
+    }
+
+    public function GetTotalTime() {
+        return $this->totalTime;
     }
 
     public function Decode(string $Data) {
@@ -109,6 +116,9 @@ class Protocol {
                         switch(ord($parameters[$i])) {
                             case self::FILTERCOUNTDOWN:
                                 $this->filterCountdown = (string )ord($parameters[$i+3]) . 'd:' . (string)ord($parameters[$i+2]). 'h:' . (string)ord($parameters[$i+1]).'m';
+                                break;
+                            case self::TOTALTIME:
+                                $this->totalTime = (string )ord($parameters[$i+3]) . 'd:' . (string)ord($parameters[$i+2]). 'h:' . (string)ord($parameters[$i+1]).'m';
                                 break;
                         }
                         $i+=$size;
