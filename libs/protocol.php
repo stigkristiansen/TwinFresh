@@ -96,12 +96,13 @@ class Protocol {
         $idSize = ord($parameters[1]);
         $passwordSize = ord($parameters[$idSize+2]);
         $startIndex = 3+$idSize+$passwordSize;
+
+        if(strcmp($parameters[$startIndex], self::EncodeValue(self::RESPONSE))!=0)
+            return false;
       
-        for($i=$startIndex;$i<sizeof($parameters);$i++) {
+        for($i=$startIndex+1;$i<sizeof($parameters);$i++) {
             IPS_LogMessage('TwinFresh', 'Handling: '.ord($parameters[$i]));
             switch(ord($parameters[$i])) {
-                case self::RESPONSE:
-                    break;
                 case self::POWER:
                     $i++;
                     $this->power = ord($parameters[$i]);
