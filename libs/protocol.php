@@ -98,6 +98,7 @@ class Protocol {
         $startIndex = 3+$idSize+$passwordSize;
       
         for($i=$startIndex;$i<sizeof($parameters);$i++) {
+            IPS_LogMessage('TwinFresh', 'Handling: '.ord($parameters[$i]));
             switch(ord($parameters[$i])) {
                 case self::RESPONSE:
                     break;
@@ -119,6 +120,7 @@ class Protocol {
                         break;
                 case self::BOOSTMODE:
                     $i++;
+                    IPS_LogMessage('TwinFresh', 'Handling Boost Mode: '.ord($parameters[$i]);
                     $this->boostMode = ord($parameters[$i]);
                     break;
                 case self::SPECIALFE:
