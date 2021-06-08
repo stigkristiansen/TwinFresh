@@ -41,7 +41,7 @@ class Protocol {
         $this->mode = self::UNINITIZIALIZED;
         $this->humidity = self::UNINITIZIALIZED;
         $this->filterCountdown = '';
-        $this->$totalTime = '';
+        $this->totalTime = '';
     }
 
     public function GetMode() {
