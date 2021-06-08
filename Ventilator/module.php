@@ -40,19 +40,6 @@ class Ventilator extends IPSModule {
 			[ReplaceFilter::OK, ReplaceFilter::OK_TEXT, '', -1]
 		]);
 
-		/*
-		$this->RegisterProfileBooleanEx(Profiles::BOOST, Profiles::BOOST_ICON, '', '', [
-			[true, 'On', '', -1],
-			[false, 'Off', '', -1]
-		]);
-
-		$this->RegisterProfileBooleanEx(Profiles::REPLACEFILTER, Profiles::REPLACEFILTER_ICON, '', '', [
-			[true, 'Replace', '', -1],
-			[false, 'Ok', '', -1]
-		]);
-
-		*/
-
 		$this->RegisterVariableBoolean(Variables::POWER_IDENT, Variables::POWER_TEXT, '~Switch', 1);
 		$this->EnableAction(Variables::POWER_IDENT);
 
@@ -81,9 +68,10 @@ class Ventilator extends IPSModule {
 	public function Destroy(){
 		$module = json_decode(file_get_contents(__DIR__ . '/module.json'));
 		if(count(IPS_GetInstanceListByModuleID($module->id))==0) {
-			$this->DeleteProfile(Profiles::POWER);
 			$this->DeleteProfile(Profiles::SPEED);
 			$this->DeleteProfile(Profiles::MODE);
+			$this->DeleteProfile(Profiles::BOOST);
+			$this->DeleteProfile(Profiles::REPLACEFILTER);
 		}
 
 		//Never delete this line!
