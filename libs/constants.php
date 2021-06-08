@@ -59,8 +59,8 @@ class Variables {
     const HUMIDITY_TEXT = 'Humidity';
     const FILTER_IDENT = 'FilterCountdown';
     const FILTER_TEXT = 'Filter Countdown';
-    const FILTERREPLACE_IDENT = 'ReplaceFilter';
-    const FILTERREPLACE_TEXT = 'Replace filter';
+    const REPLACEFILTER_IDENT = 'ReplaceFilter';
+    const REPLACEFILTER_TEXT = 'Replace filter';
     const TOTALTIME_IDENT = 'TotalTime';
     const TOTALTIME_TEXT = 'Total Time';
     const BOOSTMODE_IDENT = 'BoostMode';
