@@ -7,7 +7,7 @@ class Vent extends Protocol {
     private $password;
 
 
-    public function __construct(string $ControllerId, string $Password = '') {
+    public function __construct(string $ControllerId='', string $Password = '') {
         parent::__construct();
 
         $this->controllerId = $ControllerId;
@@ -17,6 +17,12 @@ class Vent extends Protocol {
     public function RefreshStatus() {
         $command = self::EncodeValue(self::R).self::EncodeValue(self::POWER).self::EncodeValue(self::SPEED).self::EncodeValue(self::MODE).self::EncodeValue(self::HUMIDITY).self::EncodeValue(self::FILTERCOUNTDOWN).self::EncodeValue(self::TOTALTIME);
         $message = $this->Encode($command, $this->controllerId, $this->password); 
+
+        $arr = str_split($message);
+
+        for ($i=0;$i<sizeof($arr);$i++) {
+            IPS_LogMessage('TwinFresh', ord(arr[$i]));
+        }
         
         return $message;
     }

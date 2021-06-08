@@ -56,7 +56,7 @@ class Variables {
     const FILTER_IDENT = 'FilterCountdown';
     const FILTER_TEXT = 'Filter Countdown';
     const TOTALTIME_IDENT = 'TotalTime';
-    const TOTALTIME_TEXT = 'TotalTime';
+    const TOTALTIME_TEXT = 'Total Time';
 }
 
 class Buffers {
