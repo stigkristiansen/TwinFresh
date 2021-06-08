@@ -276,7 +276,7 @@ class Ventilator extends IPSModule {
 
 		$value = $vent->GetFilterReplacement();
 		if($value!=-1)
-			$this->SetValueEx(Variables::FILTERREPLACE_IDENT, $value);
+			$this->SetValueEx(Variables::REPLACEFILTER_IDENT, $value);
 
 		$value = $vent->GetTotalTime();
 		if($value!='')
