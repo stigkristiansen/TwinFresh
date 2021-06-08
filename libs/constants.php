@@ -57,6 +57,8 @@ class Variables {
     const FILTER_TEXT = 'Filter Countdown';
     const TOTALTIME_IDENT = 'TotalTime';
     const TOTALTIME_TEXT = 'Total Time';
+    const BOOSTMODE_IDENT = 'BoostMode';
+    const BOOSTMODE_TEXT = 'Boost Mode';
 }
 
 class Buffers {

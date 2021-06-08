@@ -22,6 +22,7 @@ class Protocol {
     protected const MODERECOVERY = 0x01;
     protected const MODESUPPLY = 0x02;
     protected const HUMIDITY = 0x25;
+    protected const BOOSTMODE = 0x06;
     protected const RESPONSE = 0x06;
     protected const FILTERCOUNTDOWN = 0x64;
     protected const TOTALTIME = 0x7e;
@@ -34,12 +35,14 @@ class Protocol {
     private $humidity;
     private $filterCountdown;
     private $totalTime;
+    private $boostMode;
 
     public function __construct() {
         $this->power = self::UNINITIZIALIZED;
         $this->speed = self::UNINITIZIALIZED;
         $this->mode = self::UNINITIZIALIZED;
         $this->humidity = self::UNINITIZIALIZED;
+        $this->boostMode = self::UNINITIZIALIZED;
         $this->filterCountdown = '';
         $this->totalTime = '';
     }
@@ -66,6 +69,10 @@ class Protocol {
 
     public function GetTotalTime() {
         return $this->totalTime;
+    }
+
+    public function GetBoostMode() {
+        return $this->boostMode;
     }
 
     public function Decode(string $Data) {
@@ -110,11 +117,13 @@ class Protocol {
                         $i++;
                         $this->humidity = ord($parameters[$i]);
                         break;
+                case self::BOOSTMODE:
+                    $i++;
+                    $this->boostMode = ord($parameters[$i]);
+                    break;
                 case self::SPECIALFE:
-                        IPS_LogMessage('TwinFresh','Spesial: '. ord($parameters[$i]));
                         $size = ord($parameters[$i+1]); 
                         $i+=2;
-                        IPS_LogMessage('TwinFresh','Handling: '. ord($parameters[$i]));
                         switch(ord($parameters[$i])) {
                             case self::FILTERCOUNTDOWN:
                                 $this->filterCountdown = (string )ord($parameters[$i+3]) . 'd:' . (string)ord($parameters[$i+2]). 'h:' . (string)ord($parameters[$i+1]).'m';
