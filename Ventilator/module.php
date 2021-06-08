@@ -31,6 +31,17 @@ class Ventilator extends IPSModule {
 		]);
 
 		$this->RegisterProfileBooleanEx(Profiles::BOOST, Profiles::BOOST_ICON, '', '', [
+			[Boost::ACTIVE, Boost::ACTIVE_TEXT, '', -1],
+			[Boost::INACTIVE, Boost::INACTIVE_TEXT, '', -1]
+		]);
+
+		$this->RegisterProfileBooleanEx(Profiles::REPLACEFILTER, Profiles::REPLACEFILTER_ICON, '', '', [
+			[true, 'Replace', '', -1],
+			[false, 'Ok', '', -1]
+		]);
+
+		/*
+		$this->RegisterProfileBooleanEx(Profiles::BOOST, Profiles::BOOST_ICON, '', '', [
 			[true, 'On', '', -1],
 			[false, 'Off', '', -1]
 		]);
@@ -39,6 +50,8 @@ class Ventilator extends IPSModule {
 			[true, 'Replace', '', -1],
 			[false, 'Ok', '', -1]
 		]);
+
+		*/
 
 		$this->RegisterVariableBoolean(Variables::POWER_IDENT, Variables::POWER_TEXT, '~Switch', 1);
 		$this->EnableAction(Variables::POWER_IDENT);
