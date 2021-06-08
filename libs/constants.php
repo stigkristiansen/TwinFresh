@@ -29,10 +29,10 @@ class Profiles {
 }
 
 class Boost {
-    const ENABLED = true;
-    const ENABLED_Text = 'On';
-    const DISABLED = false;
-    const DISABLED_TEXT = 'Off';
+    const ACTIVE = true;
+    const ACTIVE_Text = 'On';
+    const INACTIVE = false;
+    const INACTIVE_TEXT = 'Off';
 }
 
 class Speed {
