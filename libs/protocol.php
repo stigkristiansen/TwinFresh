@@ -118,7 +118,7 @@ class Protocol {
                                 $this->filterCountdown = (string )ord($parameters[$i+3]) . 'd:' . (string)ord($parameters[$i+2]). 'h:' . (string)ord($parameters[$i+1]).'m';
                                 break;
                             case self::TOTALTIME:
-                                $this->totalTime = (string )ord($parameters[$i+3]) . 'd:' . (string)ord($parameters[$i+2]). 'h:' . (string)ord($parameters[$i+1]).'m';
+                                $this->totalTime = (string )ord($parameters[$i+4]<<8) | ord($parameters[$i+3]) . 'd:' . (string)ord($parameters[$i+2]). 'h:' . (string)ord($parameters[$i+1]).'m';
                                 break;
                         }
                         $i+=$size;
