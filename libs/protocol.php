@@ -120,7 +120,7 @@ class Protocol {
                         break;
                 case self::BOOSTMODE:
                     $i++;
-                    IPS_LogMessage('TwinFresh', 'Handling Boost Mode. Value is: '.ord($parameters[$i]);
+                    IPS_LogMessage('TwinFresh', 'Handling Boost Mode. Value is: '.ord($parameters[$i]));
                     $this->boostMode = ord($parameters[$i]);
                     break;
                 case self::SPECIALFE:
