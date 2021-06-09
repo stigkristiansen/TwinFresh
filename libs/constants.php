@@ -28,6 +28,8 @@ class Profiles {
     const BOOST_ICON = 'Rocket';
     const REPLACEFILTER = 'TwinFresh.Filter';
     const REPLACEFILTER_ICON = 'Warning';
+    const TIMER = 'TwinFresh.Timers';
+    const TIMER_ICON = 'Clock';
 }
 
 class Boost {

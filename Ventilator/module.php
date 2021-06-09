@@ -40,6 +40,8 @@ class Ventilator extends IPSModule {
 			[ReplaceFilter::OK, ReplaceFilter::OK_TEXT, '', -1]
 		]);
 
+		$this->RegisterProfileString(Profiles::TIMER, Profiles::TIMER_ICON, '', '');
+
 		$this->RegisterVariableBoolean(Variables::POWER_IDENT, Variables::POWER_TEXT, '~Switch', 1);
 		$this->EnableAction(Variables::POWER_IDENT);
 
@@ -53,11 +55,11 @@ class Ventilator extends IPSModule {
 
 		$this->RegisterVariableInteger(Variables::HUMIDITY_IDENT, Variables::HUMIDITY_TEXT, '~Humidity', 4);
 
-		$this->RegisterVariableString(Variables::FILTER_IDENT, Variables::FILTER_TEXT, '', 5);
+		$this->RegisterVariableString(Variables::FILTER_IDENT, Variables::FILTER_TEXT, Profiles::TIMER, 5);
 
 		$this->RegisterVariableBoolean(Variables::REPLACEFILTER_IDENT, Variables::REPLACEFILTER_TEXT, Profiles::REPLACEFILTER, 6);
 
-		$this->RegisterVariableString(Variables::TOTALTIME_IDENT, Variables::TOTALTIME_TEXT, '', 7);
+		$this->RegisterVariableString(Variables::TOTALTIME_IDENT, Variables::TOTALTIME_TEXT, Profiles::TIMER, 7);
 
 		$this->RegisterVariableBoolean(Variables::BOOSTMODE_IDENT, Variables::BOOSTMODE_TEXT, Profiles::BOOST, 8);
 		
@@ -72,6 +74,7 @@ class Ventilator extends IPSModule {
 			$this->DeleteProfile(Profiles::MODE);
 			$this->DeleteProfile(Profiles::BOOST);
 			$this->DeleteProfile(Profiles::REPLACEFILTER);
+			$this->DeleteProfile(Profiles::TIMER);
 		}
 
 		//Never delete this line!
