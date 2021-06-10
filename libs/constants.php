@@ -132,5 +132,5 @@ class Debug {
 }
 
 class Modules {
-    const TWINFRESH = '{E2CD88D8-5C7E-684D-0D20-27D5DC857197}'
+    const TWINFRESH = '{E2CD88D8-5C7E-684D-0D20-27D5DC857197}';
 }
