@@ -16,7 +16,7 @@
             },
             "columns": [
                 {
-                    "caption": "Control Id",
+                    "caption": "Id",
                     "name": "ControlId",
                     "width": "200px"
                 },
