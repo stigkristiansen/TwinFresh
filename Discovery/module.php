@@ -43,7 +43,7 @@
 					'instanceID' 			=> 0
 				];
 
-				$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::ADDEDDISCOVEREDDEVICE, $id, 0);
+				$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::ADDEDDISCOVEREDDEVICE, $id), 0);
 				
 				// Check if discovered device has an instance that is created earlier. If found, set InstanceID
 				$instanceId = array_search($id, $tfInstances);
