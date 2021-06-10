@@ -137,19 +137,18 @@ class Protocol {
                     $this->filterReplacement = ord($parameters[$i]);
                     break;
                 case self::SPECIALFE:
-                    $i++;
-                    $size = ord($parameters[$i]); 
-                    $i+=2;
-                    switch(ord($parameters[$i])) {
-                        case self::FILTERCOUNTDOWN:
-                            $this->filterCountdown = (string )ord($parameters[$i+3]) . 'd ' . (string)ord($parameters[$i+2]). 'h ' . (string)ord($parameters[$i+1]).'m ';
-                            break;
-                        case self::TOTALTIME:
-                            $this->totalTime = (string )(ord($parameters[$i+4])<<8 | ord($parameters[$i+3])) . 'd ' . (string)ord($parameters[$i+2]). 'h ' . (string)ord($parameters[$i+1]).'m ';
-                            break;
-                    }
-                    $i+=$size;
-                    break;
+                        $size = ord($parameters[$i+1]); 
+                        $i+=2;
+                        switch(ord($parameters[$i])) {
+                            case self::FILTERCOUNTDOWN:
+                                $this->filterCountdown = (string )ord($parameters[$i+3]) . 'd ' . (string)ord($parameters[$i+2]). 'h ' . (string)ord($parameters[$i+1]).'m ';
+                                break;
+                            case self::TOTALTIME:
+                                $this->totalTime = (string )(ord($parameters[$i+4])<<8 | ord($parameters[$i+3])) . 'd ' . (string)ord($parameters[$i+2]). 'h ' . (string)ord($parameters[$i+1]).'m ';
+                                break;
+                        }
+                        $i+=$size;
+                        break;
            }
         }
         
