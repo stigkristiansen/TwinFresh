@@ -128,17 +128,17 @@
 				
 				$this->SendDebug(IPS_GetName($this->InstanceID), Debug::FOUNDDEVICES, 0);
 
-				$vent = new Vent();
+				$vent = new Protocol();
 				$vent->Decode($buf);
 				$controlId = $vent->GetControlId();
 				$model = $vent->GetModel();
 
-				if($model=='' || $controllerId=='') {
+				if($model=='' || $controlId=='') {
 					$i--;
 					continue:
 				}
 
-				$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::FOUNDDEVICE, $controllerId, 0);
+				$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::FOUNDDEVICE, $controlId, 0);
 
 				$devices[$controlId] = [
 					Properties::IPADDRESS = $ipaddress;

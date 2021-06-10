@@ -53,8 +53,8 @@ class Protocol {
         $this->filterReplacement = self::UNINITIZIALIZED;
         $this->filterCountdown = self::EMPTY;
         $this->totalTime = self::EMPTY;
-        $this->controlId = self:EMPTY;
-        $this->model = self:EMPTY;
+        $this->controlId = self::EMPTY;
+        $this->model = self::EMPTY;
     }
 
     public function GetMode() {
@@ -166,7 +166,8 @@ class Protocol {
                             case self::MODEL:
                                 $modelNumber = ord($parameters[$i+2])<<8 | ord($parameters[$i+1]);
                                 switch($modelNumber) {
-                                    case 3,5:
+                                    case 3:
+                                    case 5:
                                         $this->model = 'Vento Expert A30/A50/A85/A100';
                                         break;
                                     case 4:
