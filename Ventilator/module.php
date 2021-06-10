@@ -42,7 +42,7 @@ class Ventilator extends IPSModule {
 
 		$this->RegisterProfileString(Profiles::TIMER, Profiles::TIMER_ICON, '', '');
 
-		$this->RegisterVariableBoolean(Variables::POWER_IDENT, Variables::POWER_TEXT, '~Switch', 1);
+		$this->RegisterVariableBoolean(Variables::POWER_IDENT, Variables::POWER_TEXT, Profiles::SWITCH, 1);
 		$this->EnableAction(Variables::POWER_IDENT);
 
 		$this->RegisterVariableInteger(Variables::SPEED_IDENT, Variables::SPEED_TEXT, Profiles::SPEED, 2);
@@ -53,7 +53,7 @@ class Ventilator extends IPSModule {
 		$this->EnableAction(Variables::MODE_IDENT);
 		$this->RegisterTimer(Timers::UPDATE . (string) $this->InstanceID, 0, 'if(IPS_VariableExists(' . (string) $mode . ')) RequestAction(' . (string) $mode . ', 255);'); 
 
-		$this->RegisterVariableInteger(Variables::HUMIDITY_IDENT, Variables::HUMIDITY_TEXT, '~Humidity', 4);
+		$this->RegisterVariableInteger(Variables::HUMIDITY_IDENT, Variables::HUMIDITY_TEXT, Profiles::HUMIDITY, 4);
 
 		$this->RegisterVariableString(Variables::FILTER_IDENT, Variables::FILTER_TEXT, Profiles::TIMER, 5);
 
@@ -101,9 +101,9 @@ class Ventilator extends IPSModule {
 					$this->Speed($Value);
 					break;
 				case Variables::MODE_IDENT:
-					if($Value>200) { // Values above 200 is used inside scheduled scripts and Form Actions
+					if($Value>200) { // Values above 200 are used inside scheduled scripts and Form Actions
 						switch($Value) {
-							case 255: // Call Update();
+							case 255: // Call Refresh();
 								$this->Refresh();
 								break;
 						}
@@ -236,15 +236,6 @@ class Ventilator extends IPSModule {
 	}
 	
 	private function Send(string $Text, string $ClientIP, int $ClientPort){
-		
-		/*$arr = str_split(iconv("ISO-8859-1", "UTF-8", $Text));
-
-        for ($i=0;$i<sizeof($arr);$i++) {
-            IPS_LogMessage('TwinFresh', ord($arr[$i]));
-        }
-*/
-
-
 		$this->SendDataToParent(json_encode(['DataID' => '{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}', "ClientIP" => $ClientIP, "ClientPort" => $ClientPort, "Buffer" => iconv("ISO-8859-1", "UTF-8", $Text)]));
 	}
 

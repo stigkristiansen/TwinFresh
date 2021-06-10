@@ -7,6 +7,7 @@ class Properties {
     const UPDATEINTERVAL= 'UpdateInterval';
     const ID = 'ControlId';
     const PASSWORD = 'Password';
+    const MODEL = 'model';
 }
 
 class Errors {
@@ -30,6 +31,8 @@ class Profiles {
     const REPLACEFILTER_ICON = 'Warning';
     const TIMER = 'TwinFresh.Timer';
     const TIMER_ICON = 'Clock';
+    const SWITCH = '~Switch';
+    const HUMIDITY = '~Humidity';
 }
 
 class Boost {
@@ -91,4 +94,43 @@ class Udp {
     const PORT = 4000;
 }
 
+class Messages {
+    const DISCOVER = 'Discovering TwinFresh devices...';
+}
 
+class Debug {
+    const SEARCHING = 'Update(): Searching for device with name "%s"';
+    const DEVICEFOUND = 'Update(): Found device "%s". Querying for more information';
+    const QUERYOK = 'Update(): The query returned information for "%s"';
+    const UPDATESTATUS = 'Update(): Updating statusvariable "Source" for "%s"';
+    const NEWVALUE = 'Update(): New value for "Source" for "%s" is "%s"';
+    const MISISNGSTREAMINGINFO = 'Update(): Did not find streaming information for "%s"';
+    const QUERYNOINFO = 'Update(): The query did not return any information for "%s"';
+    const DEVICENOTFOUND = 'Update(): The device "%s" was not found';
+    const INSTANCESCOMPLETED = 'GetCCInstances(): Building list of instances completed';
+    const NUMBERFOUND = 'GetCCInstances(): Added %d instance(s) of Chromecast device(s) to the list';
+    const GETTINGINSTANCES = 'GetCCInstances(): Getting list of all created Chromecast devices (module id: %s)';
+    const DISCOVERYFAILED = 'DiscoverCCDevices(): The discovery of Chromecast devices failed';
+    const NODEVICESDISCOVERED = 'DiscoverCCDevices(): Did not find any Chromecast devices on the network';
+    const INVALIDRESPONSE = 'DiscoverCCDevices(): Invalid query response from "%s. The response was: %s"';
+    const FOUNDDEVICE = 'DiscoverCCDevices(): "%s" reponded to the query. Adding it to the list';
+    const NORESPONSE = 'DiscoverCCDevices(): No Query response from "%s"';
+    const QUERYDETAILS = 'DiscoverCCDevices(): Querying "%s" for more information';
+    const FOUNDDEVICES = 'DiscoverCCDevices(): Found Chromecast devices';
+    const STARTINGDISCOVERY = 'DiscoverCCDevices(): Starting discovery of Chromecast devices';
+    const DISCOVERYCOMPLETED = 'DiscoverCCDevices(): Discovery is completed';
+    const FORMCOMPLETED = 'GetConfigurationForm(): The Configuration form build is complete';
+    const ADDINGINSTANCE = 'GetConfigurationForm(): Added existing instance "%s" with InstanceId %d';
+    const ADDINGEXISTINGINSTANCE = 'GetConfigurationForm(): Adding existing instances that are not discovered';
+    const ADDINSTANCETODEVICE = 'GetConfigurationForm(): The discovered device "%s" exists as an instance. Setting InstanceId to %d';
+    const ADDEDDISCOVEREDDEVICE = 'GetConfigurationForm(): Added discovered device "%s"';
+    const NODEVICEDISCOVERED = 'GetConfigurationForm(): No discovered devices to add';
+    const ADDINGDISCOVEREDDEVICE = 'GetConfigurationForm(): Adding discovered devices';
+    const BUILDINGFORM = 'GetConfigurationForm(): Building Configuration form';
+
+
+}
+
+class Modules {
+    TWINFRESH = '{E2CD88D8-5C7E-684D-0D20-27D5DC857197}'
+}

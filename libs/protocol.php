@@ -27,6 +27,8 @@ class Protocol {
     protected const FILTERCOUNTDOWN = 0x64;
     protected const FILTERREPLACEMENT = 0x88;
     protected const TOTALTIME = 0x7e;
+    protected const SEARCH = 0x7c;
+    protected const MODEL = 0xb9;
     protected const SPECIALFE = 0xFE;
     protected const UNINITIZIALIZED = -1;
     protected const EMPTY = '';
@@ -39,6 +41,8 @@ class Protocol {
     private $totalTime;
     private $boostMode;
     private $filterReplacement;
+    private $controlId;
+    private $model;
 
     public function __construct() {
         $this->power = self::UNINITIZIALIZED;
@@ -49,6 +53,8 @@ class Protocol {
         $this->filterReplacement = self::UNINITIZIALIZED;
         $this->filterCountdown = self::EMPTY;
         $this->totalTime = self::EMPTY;
+        $this->controlId = self:EMPTY;
+        $this->model = self:EMPTY;
     }
 
     public function GetMode() {
@@ -79,9 +85,16 @@ class Protocol {
         return $this->filterReplacement;
     }
 
-
     public function GetBoostMode() {
         return $this->boostMode;
+    }
+
+    public function GetControlId() {
+        return $this->controlId;
+    }
+
+    public function GetModel() {
+        return $this->model;
     }
 
     public function Decode(string $Data) {
@@ -146,6 +159,22 @@ class Protocol {
                                 break;
                             case self::TOTALTIME:
                                 $this->totalTime = (string )(ord($parameters[$i+4])<<8 | ord($parameters[$i+3])) . 'd ' . (string)ord($parameters[$i+2]). 'h ' . (string)ord($parameters[$i+1]).'m ';
+                                break;
+                            case self::SEARCH:
+                                $this->controlId = substr($data,$i+1, $size);
+                                break;
+                            case self::MODEL:
+                                $modelNumber = ord($parameters[$i+2])<<8 | ord($parameters[$i+1]);
+                                switch($modelNumber) {
+                                    case 3,5:
+                                        $this->model = 'Vento Expert A30/A50/A85/A100';
+                                        break;
+                                    case 4:
+                                        $this->model = 'Vento Expert Duo A30';
+                                        break;
+                                    default:
+                                        $this->model = 'Unknown';
+                                }
                                 break;
                         }
                         $i+=$size;

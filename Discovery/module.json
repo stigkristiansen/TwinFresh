@@ -1,0 +1,12 @@
+{
+    "id": "{DCA3857B-D43E-475A-BD9C-135163C1FC42}",
+    "name": "TwinFresh Discovery",
+    "type": 5,
+    "vendor": "TwinFresh",
+    "aliases": [],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "TFDI",
+    "url": ""
+}

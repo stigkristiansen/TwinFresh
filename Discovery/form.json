@@ -1,0 +1,34 @@
+{
+    "elements": [
+        {
+            "type": "NumberSpinner", "name": "DiscoveryTimeout", "caption": "Discovery Timeout", "suffix": "milliseconds"
+        }
+    ],
+    "actions": [
+        {
+            "type": "Configurator",
+            "name": "Discovery",
+            "add": false,
+            "delete": true,
+            "sort": {
+                "column": "ControlId",
+                "direction": "ascending"
+            },
+            "columns": [
+                {
+                    "caption": "Control Id",
+                    "name": "ControlId",
+                    "width": "auto"
+                },
+                {
+                    "caption": "Model",
+                    "name": "Model",
+                    "width": "auto"
+                }                
+            ],
+            "values": []
+        }
+    ]
+}
+
+
