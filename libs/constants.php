@@ -7,7 +7,8 @@ class Properties {
     const UPDATEINTERVAL= 'UpdateInterval';
     const ID = 'ControlId';
     const PASSWORD = 'Password';
-    const MODEL = 'model';
+    const MODEL = 'Model';
+    const DISCOVERYTIMEOUT = 'DiscoveryTimeout';
 }
 
 class Errors {
