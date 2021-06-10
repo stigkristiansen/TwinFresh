@@ -43,12 +43,12 @@
 					'instanceID' 			=> 0
 				];
 
-				$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::ADDEDDISCOVEREDDEVICE, $device[Properties::ID]), 0);
+				$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::ADDEDDISCOVEREDDEVICE, $id, 0);
 				
 				// Check if discovered device has an instance that is created earlier. If found, set InstanceID
 				$instanceId = array_search($id, $tfInstances);
 				if ($instanceId !== false) {
-					$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::ADDINSTANCETODEVICE, $device[Properties::ID], $instanceId), 0);
+					$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::ADDINSTANCETODEVICE, $id, $instanceId), 0);
 					unset($tfInstances[$instanceId]); // Remove from list to avoid duplicates
 					//$value[Properties::ID] = $id;
 					$value['instanceID'] = $instanceId;
@@ -56,7 +56,7 @@
 				
 				$value['create'] = [
 					'moduleID'      => Modules::TWINFRESH,
-					'name'			=> 'Ventilator '. $device[Properties::ID],
+					'name'			=> 'Ventilator '. $id,
 					'configuration' => [
 						Properties::IPADDRESS => $device[Properties::IPADDRESS],
 						Properties::ID 	 => $id
@@ -67,10 +67,10 @@
 			}
 
 			// Add devices that are not discovered, but created earlier
-			if(count($ccInstances)>0)
+			if(count($tfInstances)>0)
 				$this->SendDebug(IPS_GetName($this->InstanceID), Debug::ADDINGEXISTINGINSTANCE, 0);
 			
-			foreach ($ccInstances as $instanceId => $id) {
+			foreach ($tfInstances as $instanceId => $id) {
 				$values[] = [
 					Properties::ID => $id, 
 					'instanceID'   => $instanceId
@@ -141,7 +141,7 @@
 				$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::FOUNDDEVICE, $controlId), 0);
 
 				$devices[$controlId] = [
-					Properties::IPADDRESS => $ipaddress,
+					Properties::IPADDRESS => $ipAddress,
 					Properties::MODEL => $model
 				];
 			}
