@@ -138,7 +138,7 @@
 					continue;
 				}
 
-				$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::FOUNDDEVICE, $controlId, 0);
+				$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::FOUNDDEVICE, $controlId), 0);
 
 				$devices[$controlId] = [
 					Properties::IPADDRESS = $ipaddress;
