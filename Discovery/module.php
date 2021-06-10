@@ -135,7 +135,7 @@
 
 				if($model=='' || $controlId=='') {
 					$i--;
-					continue:
+					continue;
 				}
 
 				$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::FOUNDDEVICE, $controlId, 0);
