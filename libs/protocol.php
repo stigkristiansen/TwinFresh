@@ -110,7 +110,7 @@ class Protocol {
             return false;
       
         for($i=$startIndex+1;$i<sizeof($parameters);$i++) {
-            IPS_LogMessage('TwinFresh', 'Handling: '.ord($parameters[$i]));
+            //IPS_LogMessage('TwinFresh', 'Handling: '.ord($parameters[$i]));
             switch(ord($parameters[$i])) {
                 case self::POWER:
                     $i++;
@@ -137,8 +137,9 @@ class Protocol {
                     $this->filterReplacement = ord($parameters[$i]);
                     break;
                 case self::SPECIALFE:
-                        $size = ord($parameters[$i+1]); 
-                        $i+=2;
+                        $i++;
+                        $size = ord($parameters[$i]); 
+                        $i++;
                         switch(ord($parameters[$i])) {
                             case self::FILTERCOUNTDOWN:
                                 $this->filterCountdown = (string )ord($parameters[$i+3]) . 'd ' . (string)ord($parameters[$i+2]). 'h ' . (string)ord($parameters[$i+1]).'m ';
