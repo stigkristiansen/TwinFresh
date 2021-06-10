@@ -243,10 +243,11 @@ class Ventilator extends IPSModule {
 		$data = json_decode($JSONString);
 		$buffer = iconv("UTF-8","ISO-8859-1", $data->Buffer);
 
-		$controlId = $this->ReadPropertyString(Properties::ID);
-		$password = $this->ReadPropertyString(Properties::PASSWORD);
-			
-		$vent = new Vent($controlId, $password);
+		//$controlId = $this->ReadPropertyString(Properties::ID);
+		//$password = $this->ReadPropertyString(Properties::PASSWORD);
+		
+		//$vent = new Vent($controlId, $password);
+		$vent = new Vent();
 		$vent->Decode($buffer);
 
 		$value = $vent->GetPower();
