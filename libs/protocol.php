@@ -110,7 +110,7 @@ class Protocol {
             return false;
       
         for($i=$startIndex+1;$i<sizeof($parameters);$i++) {
-            //IPS_LogMessage('TwinFresh', 'Handling: '.ord($parameters[$i]));
+            IPS_LogMessage('TwinFresh', 'Handling: '.ord($parameters[$i]));
             switch(ord($parameters[$i])) {
                 case self::POWER:
                     $i++;
