@@ -14,7 +14,7 @@
             "type" :  "PasswordTextBox" ,  "name" :  "Password" ,  "caption" :  "Password"
         },
         {
-            "type": "NumberSpinner", "name": "UpdateInterval", "caption": "Interval", "suffix": "seconds"
+            "type": "NumberSpinner", "name": "UpdateInterval", "caption": "Refresh Interval", "suffix": "seconds"
         }
     ],
     "actions": [],
