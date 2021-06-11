@@ -27,11 +27,12 @@ class Protocol {
     protected const FILTERCOUNTDOWN = 0x64;
     protected const FILTERREPLACEMENT = 0x88;
     protected const TOTALTIME = 0x7e;
-    protected const SEARCH = 0x7c;
+    protected const DISCOVER = 0x7c;
     protected const MODEL = 0xb9;
     protected const SPECIALFE = 0xFE;
     protected const UNINITIZIALIZED = -1;
     protected const EMPTY = '';
+    protected const DEFAULTDEVICE = 'DEFAULT_DEVICEID';
 
     private $power;
     private $speed;
@@ -160,7 +161,7 @@ class Protocol {
                             case self::TOTALTIME:
                                 $this->totalTime = (string )(ord($parameters[$i+4])<<8 | ord($parameters[$i+3])) . 'd ' . (string)ord($parameters[$i+2]). 'h ' . (string)ord($parameters[$i+1]).'m ';
                                 break;
-                            case self::SEARCH:
+                            case self::DISCOVER:
                                 $this->controlId = substr($data,$i+1, $size);
                                 break;
                             case self::MODEL:
@@ -184,6 +185,13 @@ class Protocol {
         }
         
         return true;
+    }
+
+    public CreateDiscoverMessage(){
+        $command = self::EncodeValue(self::R).self::EncodeValue(self::DISCOVER);
+        $message = $this->Encode($command, self::DEFAULTDEVICE, self::EMPTY); 
+
+        return $message;
     }
 
     protected function EncodeValue(int $Value) {

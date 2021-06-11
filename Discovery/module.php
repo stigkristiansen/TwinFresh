@@ -9,7 +9,7 @@
 			//Never delete this line!
 			parent::Create();
 
-			$this->RegisterPropertyInteger(Properties::DISCOVERYTIMEOUT, 500);
+			$this->RegisterPropertyInteger(Properties::DISCOVERYTIMEOUT, 1);
 		}
 
 		public function Destroy(){
@@ -102,11 +102,15 @@
 				return [];
 			}
 			
-			$message = chr(0xfd).chr(0xfd).chr(0x02).chr(0x10).'DEFAULT_DEVICEID'.chr(0x00).chr(0x01).chr(0x7c).chr(0x30).chr(0x05);
+			//$message = chr(0xfd).chr(0xfd).chr(0x02).chr(0x10).'DEFAULT_DEVICEID'.chr(0x00).chr(0x01).chr(0x7c).chr(0x30).chr(0x05);
+			$proto = new Protocol();
+			$message = $proto->CreateDiscoverMessage();
+
+			$timeout = $this->ReadPropertyInteger(Properties::DISCOVERYTIMEOUT);
 			
-			socket_set_option($socket, SOL_SOCKET, SO_BROADCAST, 1);
 			socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1);
-			socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ['sec' => 1, 'usec' => 100000]);
+			socket_set_option($socket, SOL_SOCKET, SO_BROADCAST, 1);
+			socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ['sec' => $timeout, 'usec' => 100000]);
 			socket_bind($socket, '0.0.0.0', 0);
 			
 			if (@socket_sendto($socket, $message, strlen($message), 0, '255.255.255.255', 4000) === false) {
@@ -117,10 +121,12 @@
 						
 			$i = 50;
 			while ($i) {
-				$ret = @socket_recvfrom($socket, $buf, 2048, 0, $ipAddress, $port);
+				$ret = @socket_recvfrom($socket, $buf, 1024, 0, $ipAddress, $port);
+				
 				if ($ret === false) {
 					break;
 				}
+
 				if ($ret === 0 || $port!=4000) {
 					$i--;
 					continue;
@@ -128,10 +134,10 @@
 				
 				$this->SendDebug(IPS_GetName($this->InstanceID), Debug::FOUNDDEVICES, 0);
 
-				$vent = new Protocol();
-				$vent->Decode($buf);
-				$controlId = $vent->GetControlId();
-				$model = $vent->GetModel();
+				//$proto = new Protocol();
+				$proto->Decode($buf);
+				$controlId = $proto->GetControlId();
+				$model = $proto->GetModel();
 
 				if($model=='' || $controlId=='') {
 					$i--;
@@ -168,4 +174,5 @@
 			return $devices;
 		}
 
+		
 	}
