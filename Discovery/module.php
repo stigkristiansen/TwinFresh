@@ -119,7 +119,7 @@
 			
 			usleep(100000);
 						
-			$i = 50;
+			$i = 25;
 			while ($i) {
 				$ret = @socket_recvfrom($socket, $buf, 1024, 0, $ipAddress, $port);
 				
@@ -127,19 +127,25 @@
 					break;
 				}
 
-				if ($ret === 0 || $port!=4000) {
+				if ($ret === 0) {
 					$i--;
 					continue;
 				}
 				
-				$this->SendDebug(IPS_GetName($this->InstanceID), Debug::FOUNDDEVICES, 0);
+				$this->SendDebug(IPS_GetName($this->InstanceID), Debug::RECEIVEDDATA, 0);
 
-				//$proto = new Protocol();
-				$proto->Decode($buf);
+				$proto = new Protocol();
+				if($proto->Decode($buf)==false) {
+					$this->SendDebug(IPS_GetName($this->InstanceID), Debug::INVALIDDATA, 0);
+					$i--;
+					continue;
+				};
+
 				$controlId = $proto->GetControlId();
 				$model = $proto->GetModel();
 
 				if($model=='' || $controlId=='') {
+					$this->SendDebug(IPS_GetName($this->InstanceID), Debug::INVALIDDATA, 0);
 					$i--;
 					continue;
 				}
