@@ -80,7 +80,7 @@ class Variables {
     const FILTER_IDENT = 'FilterCountdown';
     const FILTER_TEXT = 'Filter Countdown';
     const REPLACEFILTER_IDENT = 'ReplaceFilter';
-    const REPLACEFILTER_TEXT = 'Replace filter';
+    const REPLACEFILTER_TEXT = 'Replace Filter';
     const TOTALTIME_IDENT = 'TotalTime';
     const TOTALTIME_TEXT = 'Total Time';
     const BOOSTMODE_IDENT = 'BoostMode';
@@ -115,6 +115,9 @@ class Debug {
     const NODEVICEDISCOVERED = 'GetConfigurationForm(): No discovered devices to add';
     const ADDINGDISCOVEREDDEVICE = 'GetConfigurationForm(): Adding discovered devices';
     const BUILDINGFORM = 'GetConfigurationForm(): Building Configuration form';
+    const DECODEFAILED = 'ReceiveData(): Failed to decode the incoming message. The error was "%s"';
+    const SENDTTOPARENTFAILED = 'Send(): Failed to send message to parrent instance. The error was "%s"';
+    const REQUESTACTIONFAILED = 'RequestAction(): Unexpected error. The error was: "%s"';
 }
 
 class Modules {

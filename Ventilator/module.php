@@ -114,6 +114,7 @@ class Ventilator extends IPSModule {
 			}
 		} catch(Exception $e) {
 			$this->LogMessage(sprintf(Errors::UNEXPECTED,  $e->getMessage()), KL_ERROR);
+			$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::REQUESTACTIONFAILED, $e->getMessage()), 0);
 		}
 	}
 
@@ -236,7 +237,13 @@ class Ventilator extends IPSModule {
 	}
 	
 	private function Send(string $Text, string $ClientIP, int $ClientPort){
-		$this->SendDataToParent(json_encode(['DataID' => '{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}', "ClientIP" => $ClientIP, "ClientPort" => $ClientPort, "Buffer" => iconv("ISO-8859-1", "UTF-8", $Text)]));
+		try {
+			$this->SendDataToParent(json_encode(['DataID' => '{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}', "ClientIP" => $ClientIP, "ClientPort" => $ClientPort, "Buffer" => iconv("ISO-8859-1", "UTF-8", $Text)]));
+		} catch(Exception $e) {
+			$this->LogMessage(sprintf(Errors::UNEXPECTED,  $e->getMessage()), KL_ERROR);
+			$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::SENDTTOPARENTFAILED,  $e->getMessage()), 0);
+		}
+		
 	}
 
 	public function ReceiveData($JSONString){
@@ -248,39 +255,43 @@ class Ventilator extends IPSModule {
 		
 		//$vent = new Vent($controlId, $password);
 		$vent = new Vent();
-		$vent->Decode($buffer);
+		if($vent->Decode($buffer)==true) {
 
-		$value = $vent->GetPower();
-		if($value!=-1)
-			$this->SetValueEx(Variables::POWER_IDENT, $value);
-		
-		$value = $vent->GetSpeed();
-		if($value!=-1)
-			$this->SetValueEx(Variables::SPEED_IDENT, $value);
+			$value = $vent->GetPower();
+			if($value!=-1)
+				$this->SetValueEx(Variables::POWER_IDENT, $value);
+			
+			$value = $vent->GetSpeed();
+			if($value!=-1)
+				$this->SetValueEx(Variables::SPEED_IDENT, $value);
 
-		$value = $vent->GetMode();
-		if($value!=-1)
-			$this->SetValueEx(Variables::MODE_IDENT, $value);
+			$value = $vent->GetMode();
+			if($value!=-1)
+				$this->SetValueEx(Variables::MODE_IDENT, $value);
 
-		$value = $vent->GetHumidity();
-		if($value!=-1)
-			$this->SetValueEx(Variables::HUMIDITY_IDENT, $value);
+			$value = $vent->GetHumidity();
+			if($value!=-1)
+				$this->SetValueEx(Variables::HUMIDITY_IDENT, $value);
 
-		$value = $vent->GetFilterCountdown();
-		if($value!='')
-			$this->SetValueEx(Variables::FILTER_IDENT, $value);
+			$value = $vent->GetFilterCountdown();
+			if($value!='')
+				$this->SetValueEx(Variables::FILTER_IDENT, $value);
 
-		$value = $vent->GetFilterReplacement();
-		if($value!=-1)
-			$this->SetValueEx(Variables::REPLACEFILTER_IDENT, $value);
+			$value = $vent->GetFilterReplacement();
+			if($value!=-1)
+				$this->SetValueEx(Variables::REPLACEFILTER_IDENT, $value);
 
-		$value = $vent->GetTotalTime();
-		if($value!='')
-			$this->SetValueEx(Variables::TOTALTIME_IDENT, $value);
+			$value = $vent->GetTotalTime();
+			if($value!='')
+				$this->SetValueEx(Variables::TOTALTIME_IDENT, $value);
 
-		$value = $vent->GetBoostMode();
-		if($value!=-1)
-			$this->SetValueEx(Variables::BOOSTMODE_IDENT, $value);
+			$value = $vent->GetBoostMode();
+			if($value!=-1)
+				$this->SetValueEx(Variables::BOOSTMODE_IDENT, $value);
+		else {
+			$this->LogMessage(sprintf(Errors::UNEXPECTED,  $e->getMessage()), KL_ERROR);
+			$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::DECODEFAILED, $e->getMessage()), 0);
+		}
 	}
 
 	private function SetValueEx(string $Ident, $Value) {

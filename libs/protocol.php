@@ -178,9 +178,13 @@ class Protocol {
                                         $this->model = 'Unknown';
                                 }
                                 break;
+                            default:
+                                return false;
                         }
                         $i+=$size;
                         break;
+                default:
+                    return false;
            }
         }
         
