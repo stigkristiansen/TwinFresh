@@ -187,7 +187,7 @@ class Protocol {
         return true;
     }
 
-    public CreateDiscoverMessage(){
+    public function CreateDiscoverMessage(){
         $command = self::EncodeValue(self::R).self::EncodeValue(self::DISCOVER);
         $message = $this->Encode($command, self::DEFAULTDEVICE, self::EMPTY); 
 
