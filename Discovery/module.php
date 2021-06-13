@@ -121,6 +121,7 @@
 						
 			$i = 25;
 			while ($i) {
+				$this->SendDebug(IPS_GetName($this->InstanceID), 'Waiting for data...', 0);
 				$ret = @socket_recvfrom($socket, $buffer, 1024, 0, $ipAddress, $port);
 				
 				if ($ret === false) {
