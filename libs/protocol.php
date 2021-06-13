@@ -232,7 +232,7 @@ class Protocol {
         return chr($size).$ControllerId;
     }
 
-    private function EncodePassword($Password){
+    private function EncodePassword(string $Password){
         $size = strlen($Password);
         if($size>0)
             return chr($size).$Password;
