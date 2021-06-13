@@ -106,6 +106,7 @@ class Debug {
     const RECEIVEDDATA = 'DiscoverTFDevices(): Received data...';
     const INVALIDDATA = 'DiscoverTFDevices(): Invalid or incomplete data';
     const FOUNDDEVICE = 'DiscoverTFDevices(): "%s" reponded to the query. Adding it to the list';
+    const ENDEDDISCOVERY = 'DiscoverTFDevices(): Ended discovery of TwinFresh devices';
     const STARTINGDISCOVERY = 'DiscoverTFDevices(): Starting discovery of TwinFresh devices';
     const FORMCOMPLETED = 'GetConfigurationForm(): The Configuration form build is complete';
     const ADDINGINSTANCE = 'GetConfigurationForm(): Added existing instance "%s" with InstanceId %d';

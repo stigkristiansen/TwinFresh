@@ -121,7 +121,7 @@
 						
 			$i = 25;
 			while ($i) {
-				$ret = @socket_recvfrom($socket, $buf, 1024, 0, $ipAddress, $port);
+				$ret = @socket_recvfrom($socket, $buffer, 1024, 0, $ipAddress, $port);
 				
 				if ($ret === false) {
 					break;
@@ -135,7 +135,7 @@
 				$this->SendDebug(IPS_GetName($this->InstanceID), Debug::RECEIVEDDATA, 0);
 
 				$proto = new Protocol();
-				if($proto->Decode($buf)==false) {
+				if($proto->Decode($buffer)==false) {
 					$this->SendDebug(IPS_GetName($this->InstanceID), Debug::INVALIDDATA, 0);
 					$i--;
 					continue;
@@ -159,6 +159,8 @@
 			}
 
 			socket_close($socket);
+
+			$this->SendDebug(IPS_GetName($this->InstanceID), Debug::ENDEDDISCOVERY, 0);
 			
 			return $devices;
 		}
