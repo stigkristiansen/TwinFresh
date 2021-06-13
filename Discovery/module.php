@@ -102,7 +102,6 @@
 				return [];
 			}
 			
-			//$message = chr(0xfd).chr(0xfd).chr(0x02).chr(0x10).'DEFAULT_DEVICEID'.chr(0x00).chr(0x01).chr(0x7c).chr(0x30).chr(0x05);
 			$proto = new Protocol();
 			$message = $proto->CreateDiscoverMessage();
 
@@ -113,12 +112,10 @@
 			socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ['sec' => $timeout, 'usec' => 0]);
 			socket_bind($socket, '0.0.0.0', 0);
 			
-			if (@socket_sendto($socket, $message, strlen($message), 0, '255.255.255.255', 4000) === false) {
+			if (@socket_sendto($socket, $message, strlen($message), 0, '255.255.255.255', Upd::PORT) === false) {
 				return [];
 			}
-			
-			//usleep(100000);
-						
+												
 			$i = 25;
 			while ($i) {
 				$this->SendDebug(IPS_GetName($this->InstanceID), Debug::WAITING, 0);
