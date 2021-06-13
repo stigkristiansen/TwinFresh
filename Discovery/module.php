@@ -112,7 +112,7 @@
 			socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ['sec' => $timeout, 'usec' => 0]);
 			socket_bind($socket, '0.0.0.0', 0);
 			
-			if (@socket_sendto($socket, $message, strlen($message), 0, '255.255.255.255', Upd::PORT) === false) {
+			if (@socket_sendto($socket, $message, strlen($message), 0, '255.255.255.255', Udp::PORT) === false) {
 				return [];
 			}
 												
