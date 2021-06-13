@@ -27,8 +27,7 @@ trait ProfileHelper {
             IPS_DeleteVariableProfile($Name);
     }
 
-    protected function RegisterProfileString($Name, $Icon, $Prefix, $Suffix) {
-
+    protected function RegisterProfileString(string $Name, string $Icon, string $Prefix, string $Suffix) {
         if (!IPS_VariableProfileExists($Name)) {
             IPS_CreateVariableProfile($Name, 3);
         } else {
@@ -42,8 +41,7 @@ trait ProfileHelper {
         IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
     }
 
-    protected function RegisterProfileStringEx($Name, $Icon, $Prefix, $Suffix, $Associations) {
-        
+    protected function RegisterProfileStringEx(string $Name, string $Icon, string $Prefix, string $Suffix, array $Associations) {
         $this->RegisterProfileString($Name, $Icon, $Prefix, $Suffix);
 
         foreach ($Associations as $association) {
@@ -66,8 +64,7 @@ trait ProfileHelper {
         }
     }
 
-    protected function RegisterProfileBoolean($Name, $Icon, $Prefix, $Suffix) {
-
+    protected function RegisterProfileBoolean(string $Name, string $Icon, string $Prefix, string $Suffix) {
         if (!IPS_VariableProfileExists($Name)) {
             IPS_CreateVariableProfile($Name, 0);
         } else {
@@ -81,8 +78,7 @@ trait ProfileHelper {
         IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
     }
 
-    protected function RegisterProfileBooleanEx($Name, $Icon, $Prefix, $Suffix, $Associations) {
-        
+    protected function RegisterProfileBooleanEx(string $Name, string $Icon, string $Prefix, string $Suffix, array $Associations) {
         $this->RegisterProfileBoolean($Name, $Icon, $Prefix, $Suffix);
 
         foreach ($Associations as $association) {
@@ -105,7 +101,7 @@ trait ProfileHelper {
         }
     }
     
-    protected function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize) {
+    protected function RegisterProfileInteger(string $Name, string $Icon, string $Prefix, string $Suffix, int $MinValue, int $MaxValue, int $StepSize) {
         if (!IPS_VariableProfileExists($Name)) {
             IPS_CreateVariableProfile($Name, 1);
         } else {
@@ -120,7 +116,7 @@ trait ProfileHelper {
         IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
     }
 
-    protected function RegisterProfileIntegerEx($Name, $Icon, $Prefix, $Suffix, $Associations) {
+    protected function RegisterProfileIntegerEx(string $Name, string $Icon, string $Prefix, string $Suffix, array $Associations) {
         
         if (count($Associations) === 0) {
             $MinValue = 0;
@@ -162,7 +158,7 @@ trait ProfileHelper {
         return $assosiations;
     }
 
-    protected function GetProfileAssosiationName($ProfileName, $Index) {
+    protected function GetProfileAssosiationName(string $ProfileName, int $Index) {
         $profile = IPS_GetVariableProfile($ProfileName);
     
         if($profile!==false) {
@@ -173,6 +169,5 @@ trait ProfileHelper {
         } 
     
         return false;
-    
     }
 }
