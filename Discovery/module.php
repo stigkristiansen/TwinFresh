@@ -99,6 +99,7 @@
 
 			$socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
 			if (!$socket) {
+				$this->SendDebug(IPS_GetName($this->InstanceID), Debug::CREATESOCKETFAILED, 0);
 				return [];
 			}
 			
@@ -113,6 +114,7 @@
 			socket_bind($socket, '0.0.0.0', 0);
 			
 			if (@socket_sendto($socket, $message, strlen($message), 0, '255.255.255.255', Udp::PORT) === false) {
+				$this->SendDebug(IPS_GetName($this->InstanceID), Debug::SENDSOCKETFAILED, 0);
 				return [];
 			}
 												

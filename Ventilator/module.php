@@ -185,7 +185,7 @@ class Ventilator extends IPSModule {
 		}
 	}
 
-	private function VerifyDeviceIp($IpAddress) {
+	private function VerifyDeviceIp(string $IpAddress) {
 		if(strlen($IpAddress)>0)
 			if($this->PingTest($IpAddress)) {
 				$report['IpAddressCheck'] = 0; // Reset count on success
@@ -250,10 +250,6 @@ class Ventilator extends IPSModule {
 		$data = json_decode($JSONString);
 		$buffer = iconv("UTF-8","ISO-8859-1", $data->Buffer);
 
-		//$controlId = $this->ReadPropertyString(Properties::ID);
-		//$password = $this->ReadPropertyString(Properties::PASSWORD);
-		
-		//$vent = new Vent($controlId, $password);
 		$vent = new Vent();
 		if($vent->Decode($buffer)==true) {
 

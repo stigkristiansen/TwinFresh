@@ -109,6 +109,8 @@ class Debug {
     const FOUNDDEVICE = 'DiscoverTFDevices(): "%s" reponded to the query. Adding it to the list';
     const ENDEDDISCOVERY = 'DiscoverTFDevices(): Ended discovery of TwinFresh devices';
     const STARTINGDISCOVERY = 'DiscoverTFDevices(): Starting discovery of TwinFresh devices';
+    const CREATESOCKETFAILED = 'DiscoverTFDevices(): Creating socket failed!';
+    const SENDSOCKETFAILED = 'DiscoverTFDevices(): Sending socket failed!';
     const FORMCOMPLETED = 'GetConfigurationForm(): The Configuration form build is complete';
     const ADDINGINSTANCE = 'GetConfigurationForm(): Added existing instance "%s" with InstanceId %d';
     const ADDINGEXISTINGINSTANCE = 'GetConfigurationForm(): Adding existing instances that are not discovered';
