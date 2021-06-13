@@ -110,18 +110,18 @@
 			
 			socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1);
 			socket_set_option($socket, SOL_SOCKET, SO_BROADCAST, 1);
-			socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ['sec' => $timeout, 'usec' => 100000]);
+			socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ['sec' => $timeout, 'usec' => 0]);
 			socket_bind($socket, '0.0.0.0', 0);
 			
 			if (@socket_sendto($socket, $message, strlen($message), 0, '255.255.255.255', 4000) === false) {
 				return [];
 			}
 			
-			usleep(100000);
+			//usleep(100000);
 						
 			$i = 25;
 			while ($i) {
-				$this->SendDebug(IPS_GetName($this->InstanceID), 'Waiting for data...', 0);
+				$this->SendDebug(IPS_GetName($this->InstanceID), Debug::WAITING, 0);
 				$ret = @socket_recvfrom($socket, $buffer, 1024, 0, $ipAddress, $port);
 				
 				if ($ret === false) {

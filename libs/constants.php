@@ -103,6 +103,7 @@ class Debug {
     const INSTANCESCOMPLETED = 'GetTFInstances(): Building list of instances completed';
     const NUMBERFOUND = 'GetTFInstances(): Added %d instance(s) of TwinFresh device(s) to the list';
     const GETTINGINSTANCES = 'GetTFInstances(): Getting list of all created TwinFresh devices (module id: %s)';
+    const WAITING ='DiscoverTFDevices(): Waiting for data...';
     const RECEIVEDDATA = 'DiscoverTFDevices(): Received data...';
     const INVALIDDATA = 'DiscoverTFDevices(): Invalid or incomplete data';
     const FOUNDDEVICE = 'DiscoverTFDevices(): "%s" reponded to the query. Adding it to the list';
