@@ -250,6 +250,8 @@ class Ventilator extends IPSModule {
 		$data = json_decode($JSONString);
 		$buffer = iconv("UTF-8","ISO-8859-1", $data->Buffer);
 
+		$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::RECEIVEDDATA,  $buffer), 0);
+
 		$vent = new Vent();
 		if($vent->Decode($buffer)==true) {
 
