@@ -8,9 +8,7 @@ class Ventilator extends IPSModule {
 	use ProfileHelper, BufferHelper;
 
 	public function GetConfigurationForParent() {
-			
-		return '{"Open":true,"EnableBroadcast":false,"EnableReuseAddress":true}';
-		
+		return '{"Open":true,"BindPort":0,"Host":"","Port":0,"EnableBroadcast":false,"EnableReuseAddress":true}';
 	}
 	
 	public function Create(){
