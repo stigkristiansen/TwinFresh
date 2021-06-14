@@ -105,12 +105,15 @@ class Ventilator extends IPSModule {
 		try {
 			switch ($Ident) {
 				case Variables::POWER_IDENT:
+					$this->SendDebug(IPS_GetName($this->InstanceID), Debug::POWER, 0);
 					$this->Power($Value);
 					break;
 				case Variables::SPEED_IDENT:
+					$this->SendDebug(IPS_GetName($this->InstanceID), Debug::SPEED, 0);
 					$this->Speed($Value);
 					break;
 				case Variables::MODE_IDENT:
+					$this->SendDebug(IPS_GetName($this->InstanceID), Debug::MODE, 0);
 					if($Value>200) { // Values above 200 are used inside scheduled scripts and Form Actions
 						switch($Value) {
 							case 255: // Call Refresh();
@@ -141,9 +144,8 @@ class Ventilator extends IPSModule {
 	}
 
 	private function Power(bool $State) {
-		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
-						
 		if($this->VerifyDevice()){
+			$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 			$controlId = $this->ReadPropertyString(Properties::ID);
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 			
@@ -155,9 +157,8 @@ class Ventilator extends IPSModule {
 	}
 
 	private function Speed(int $Value) {
-		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
-						
 		if($this->VerifyDevice()){
+			$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 			$controlId = $this->ReadPropertyString(Properties::ID);
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 
@@ -169,9 +170,8 @@ class Ventilator extends IPSModule {
 	}
 
 	private function Mode(int $Value) {
-		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
-						
 		if($this->VerifyDevice()){
+			$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 			$controlId = $this->ReadPropertyString(Properties::ID);
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 			
@@ -183,9 +183,8 @@ class Ventilator extends IPSModule {
 	}
 
 	private function Refresh() {
-		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
-						
 		if($this->VerifyDevice()){
+			$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 			$controlId = $this->ReadPropertyString(Properties::ID);
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 			
@@ -240,17 +239,6 @@ class Ventilator extends IPSModule {
 		$this->SendDebug(IPS_GetName($this->InstanceID), 'VeryfyDevice(): '.$msg, 0);
 		
 		return false;	
-	}
-
-	private function PingTest(string $IPAddress) {
-		$wait = 500;
-		for($count=0;$count<3;$count++) {
-			if(Sys_Ping($IPAddress, $wait))
-				return true;
-			$wait*=2;
-		}
-
-		return false;
 	}
 	
 	private function Send(string $Text, string $ClientIP, int $ClientPort){

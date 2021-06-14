@@ -126,6 +126,9 @@ class Debug {
     const REQUESTACTIONFAILED = 'RequestAction(): Unexpected error. The error was: "%s"';
     const VERIFYINGIOINSTANCE = 'VerifyDevice(): Verifying I/O instance %s...';
     const INSTANCEVERIFIED = 'VerifyDevice(): The instance %s is OK';
+    const POWER = 'RequestAction(): Handling Power...';
+    const SPEED = 'RequestAction(): Handling Speed...';
+    const MODE = 'RequestAction(): Handling Mode...';
 }
 
 class Modules {
