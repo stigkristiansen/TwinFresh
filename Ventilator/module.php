@@ -6,12 +6,20 @@ require_once(__DIR__ . "/../libs/autoload.php");
 
 class Ventilator extends IPSModule {
 	use ProfileHelper, BufferHelper;
+
+	public function GetConfigurationForParent() {
+			
+		return '{"Open":true,"EnableBroadcast":false,"EnableReuseAddress":true}';
+		
+	}
 	
 	public function Create(){
 		//Never delete this line!
 		parent::Create();
 
 		$this->RequireParent('{82347F20-F541-41E1-AC5B-A636FD3AE2D8}');
+
+		//{"Open":true,"BindIP":"192.168.0.100","BindPort":0,"Host":"","Port":0,"EnableBroadcast":false,"EnableReuseAddress":true}
 
 		$this->RegisterPropertyString(Properties::IPADDRESS, '');
 		$this->RegisterPropertyString(Properties::ID, '');
@@ -126,6 +134,7 @@ class Ventilator extends IPSModule {
     }
 
 	private function SetTimer() {
+
 		$this->SetTimerInterval(Timers::UPDATE . (string) $this->InstanceID, $this->ReadPropertyInteger(Properties::UPDATEINTERVAL)*1000);
 	}
 
