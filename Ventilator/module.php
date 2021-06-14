@@ -198,7 +198,7 @@ class Ventilator extends IPSModule {
 
 	private function VerifyDevice() {
 		$socketId = IPS_GetConfiguration($this-InstanceID)["ConnectionID"];
-		if(json_decode(IPS_GetConfiguration($socketId), true)["Open"]==true)
+		if(json_decode(IPS_GetConfiguration($socketId), true)["Open"]==true) {
 			$report['IpAddressCheck'] = 0; // Reset count on success
 		
 			if($this->Lock(Buffers::REPORT)) {
