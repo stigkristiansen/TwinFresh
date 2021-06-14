@@ -17,8 +17,6 @@ class Ventilator extends IPSModule {
 
 		$this->RequireParent('{82347F20-F541-41E1-AC5B-A636FD3AE2D8}');
 
-		//{"Open":true,"BindIP":"192.168.0.100","BindPort":0,"Host":"","Port":0,"EnableBroadcast":false,"EnableReuseAddress":true}
-
 		$this->RegisterPropertyString(Properties::IPADDRESS, '');
 		$this->RegisterPropertyString(Properties::ID, '');
 		$this->RegisterPropertyString(Properties::PASSWORD, '');
@@ -92,6 +90,12 @@ class Ventilator extends IPSModule {
 		//Never delete this line!
 		parent::ApplyChanges();
 
+		$report['IpAddressCheck'] = 0;
+		if($this->Lock(Buffers::REPORT)) {
+			$this->SetBuffer(Buffers::REPORT, serialize($report));
+			$this->Unlock(Buffers::REPORT);
+		}
+
 		if (IPS_GetKernelRunlevel() == KR_READY) {
             $this->SetTimer();
         }
@@ -139,7 +143,7 @@ class Ventilator extends IPSModule {
 	private function Power(bool $State) {
 		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 						
-		if($this->VerifyDeviceIp($ipAddress)){
+		if($this->VerifyDevice()){
 			$controlId = $this->ReadPropertyString(Properties::ID);
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 			
@@ -153,7 +157,7 @@ class Ventilator extends IPSModule {
 	private function Speed(int $Value) {
 		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 						
-		if($this->VerifyDeviceIp($ipAddress)){
+		if($this->VerifyDevice()){
 			$controlId = $this->ReadPropertyString(Properties::ID);
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 
@@ -167,7 +171,7 @@ class Ventilator extends IPSModule {
 	private function Mode(int $Value) {
 		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 						
-		if($this->VerifyDeviceIp($ipAddress)){
+		if($this->VerifyDevice()){
 			$controlId = $this->ReadPropertyString(Properties::ID);
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 			
@@ -181,7 +185,7 @@ class Ventilator extends IPSModule {
 	private function Refresh() {
 		$ipAddress = $this->ReadPropertyString(Properties::IPADDRESS);
 						
-		if($this->VerifyDeviceIp($ipAddress)){
+		if($this->VerifyDevice()){
 			$controlId = $this->ReadPropertyString(Properties::ID);
 			$password = $this->ReadPropertyString(Properties::PASSWORD);
 			
@@ -192,22 +196,21 @@ class Ventilator extends IPSModule {
 		}
 	}
 
-	private function VerifyDeviceIp(string $IpAddress) {
-		if(strlen($IpAddress)>0)
-			if($this->PingTest($IpAddress)) {
-				$report['IpAddressCheck'] = 0; // Reset count on success
+	private function VerifyDevice() {
+		$socketId = IPS_GetConfiguration($this-InstanceID)["ConnectionID"];
+		if(json_decode(IPS_GetConfiguration($socketId)), true)["Open"]==true)
+			$report['IpAddressCheck'] = 0; // Reset count on success
+		
+			if($this->Lock(Buffers::REPORT)) {
+				$this->SetBuffer(Buffers::REPORT, serialize($report));
+				$this->Unlock(Buffers::REPORT);
+			}
 			
-				if($this->Lock(Buffers::REPORT)) {
-					$this->SetBuffer(Buffers::REPORT, serialize($report));
-					$this->Unlock(Buffers::REPORT);
-				}
-				
-				$this->SetStatus(102);
-				return true;
-			} else
-				$msg = sprintf(Errors::NOTRESPONDING, (string) $this->InstanceID, $IpAddress);
-		else
-			$msg = sprintf(Errors::MISSINGIP, (string) $this->InstanceID);	
+			$this->SetStatus(102);
+			
+			return true;
+		} else 
+			$msg = sprintf(Errors::SOCKETCLOSED, (string) $this->socketId);	
 
 		$this->SetStatus(104);
 		
@@ -228,6 +231,8 @@ class Ventilator extends IPSModule {
 			
 			$this->LogMessage($msg, KL_ERROR);
 		}
+
+		$this->SendDebug(IPS_GetName($this->InstanceID), msg, 0);
 		
 		return false;	
 	}

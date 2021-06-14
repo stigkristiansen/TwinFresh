@@ -15,6 +15,7 @@ class Errors {
     const UNEXPECTED = 'An unexpected error occured. The error was : %s';
     const MISSINGIP = "The device %s is missing information about it's ip address";
     const NOTRESPONDING = 'The device %s is not responding (%s)';
+    const SOCKETCLOSED = 'The I/O instance %s is not in an open state';
 }
 
 class Timers {
