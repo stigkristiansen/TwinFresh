@@ -236,7 +236,7 @@ class Ventilator extends IPSModule {
 			$this->LogMessage($msg, KL_ERROR);
 		}
 
-		$this->SendDebug(IPS_GetName($this->InstanceID), 'VeryfyDevice(): '.$msg, 0);
+		$this->SendDebug(IPS_GetName($this->InstanceID), 'VerifyDevice(): '.$msg, 0);
 		
 		return false;	
 	}

@@ -11,13 +11,6 @@ class Properties {
     const DISCOVERYTIMEOUT = 'DiscoveryTimeout';
 }
 
-class Errors {
-    const UNEXPECTED = 'An unexpected error occured. The error was : %s';
-    const MISSINGIP = "The device %s is missing information about it's ip address";
-    const NOTRESPONDING = 'The device %s is not responding (%s)';
-    const SOCKETCLOSED = 'The I/O instance %s is not in an open state';
-}
-
 class Timers {
     const UPDATE = 'Update';
 }
@@ -98,6 +91,11 @@ class Udp {
 
 class Messages {
     const DISCOVER = 'Discovering TwinFresh devices...';
+}
+
+class Errors {
+    const UNEXPECTED = 'An unexpected error occured. The error was : %s';
+    const SOCKETCLOSED = 'The I/O instance %s is not in an open state';
 }
 
 class Debug {
