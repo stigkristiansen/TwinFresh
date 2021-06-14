@@ -260,7 +260,7 @@ class Ventilator extends IPSModule {
 
 		$vent = new Vent();
 		try {
-			$vent->Decode($buffer)
+			$vent->Decode($buffer);
 		//if($vent->Decode($buffer)==true) {
 			$this->SendDebug(IPS_GetName($this->InstanceID), Debug::DECODEOK, 0);
 
