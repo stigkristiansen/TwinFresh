@@ -121,7 +121,7 @@ class Debug {
     const ADDINGDISCOVEREDDEVICE = 'GetConfigurationForm(): Adding discovered devices';
     const BUILDINGFORM = 'GetConfigurationForm(): Building Configuration form';
     const DECODEFAILED = 'ReceiveData(): Failed to decode the incoming message. The error was "%s"';
-    const DECODEOK 'ReceiveData(): Decoded incoming data';
+    const DECODEOK = 'ReceiveData(): Decoded incoming message';
     const RECEIVEDDATAFROMPARENT = 'ReceiveData(): Received data. The data is "%s"';
     const SENDTTOPARENTFAILED = 'Send(): Failed to send message to parrent instance. The error was "%s"';
     const REQUESTACTIONFAILED = 'RequestAction(): Unexpected error. The error was: "%s"';
