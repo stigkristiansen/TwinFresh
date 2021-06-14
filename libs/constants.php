@@ -121,6 +121,7 @@ class Debug {
     const ADDINGDISCOVEREDDEVICE = 'GetConfigurationForm(): Adding discovered devices';
     const BUILDINGFORM = 'GetConfigurationForm(): Building Configuration form';
     const DECODEFAILED = 'ReceiveData(): Failed to decode the incoming message. The error was "%s"';
+    const DECODEOK 'ReceiveData(): Decoded incoming data';
     const RECEIVEDDATAFROMPARENT = 'ReceiveData(): Received data. The data is "%s"';
     const SENDTTOPARENTFAILED = 'Send(): Failed to send message to parrent instance. The error was "%s"';
     const REQUESTACTIONFAILED = 'RequestAction(): Unexpected error. The error was: "%s"';
@@ -129,6 +130,7 @@ class Debug {
     const POWER = 'RequestAction(): Handling Power...';
     const SPEED = 'RequestAction(): Handling Speed...';
     const MODE = 'RequestAction(): Handling Mode...';
+    const SENDINGDATA = 'Send(): Transmitting data to parent i/o instance...';
 }
 
 class Modules {
