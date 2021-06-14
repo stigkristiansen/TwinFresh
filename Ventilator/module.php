@@ -259,7 +259,9 @@ class Ventilator extends IPSModule {
 		$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::RECEIVEDDATAFROMPARENT,  $buffer), 0);
 
 		$vent = new Vent();
-		if($vent->Decode($buffer)==true) {
+		try {
+			$vent->Decode($buffer)
+		//if($vent->Decode($buffer)==true) {
 			$this->SendDebug(IPS_GetName($this->InstanceID), Debug::DECODEOK, 0);
 
 			$value = $vent->GetPower();
@@ -293,7 +295,8 @@ class Ventilator extends IPSModule {
 			$value = $vent->GetBoostMode();
 			if($value!=-1)
 				$this->SetValueEx(Variables::BOOSTMODE_IDENT, $value);
-		} else {
+		//} else {
+		} catch (Exception $e) {
 			$this->LogMessage(sprintf(Errors::UNEXPECTED, $e->getMessage()), KL_ERROR); // Bytt tekst eller feilsjekk til try/catch/raise
 			$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::DECODEFAILED, $e->getMessage()), 0);
 		}

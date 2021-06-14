@@ -102,26 +102,30 @@ class Protocol {
         $prefix = substr($Data, 0, 2);
        
         if(strcmp($prefix, self::EncodeValue(self::PREFIX))!=0)
-            return false;
+        throw new Exception('Invalid prefix!');
+            //return false;
         
         $receivedChecksum = substr($Data, strlen($Data)-2);
         
         $data = substr($Data, 2, strlen($Data)-4);
         $calculatedChecksum = $this->Checksum($data);
         if(strcmp($receivedChecksum, $calculatedChecksum)!=0)
-            return false;
+        throw new Exception('Invalid checksum');
+            //return false;
 
         $parameters = str_split($data);
 
         if(strcmp($parameters[0], self::EncodeValue(self::TYPE))!=0)
-            return false;
+            throw new Exception('Invalid type field!');
+            //return false;
 
         $idSize = ord($parameters[1]);
         $passwordSize = ord($parameters[$idSize+2]);
         $startIndex = 3+$idSize+$passwordSize;
 
         if(strcmp($parameters[$startIndex], self::EncodeValue(self::RESPONSE))!=0)
-            return false;
+            throw new Exception('Missing response code!');
+            //return false;
       
         for($i=$startIndex+1;$i<sizeof($parameters);$i++) {
             //IPS_LogMessage('TwinFresh', 'Handling: '.ord($parameters[$i]));
@@ -179,16 +183,18 @@ class Protocol {
                                 }
                                 break;
                             default:
-                                return false;
+                                throw new Exception('Unknown parameter!');
+                                //return false;
                         }
                         $i+=$size;
                         break;
                 default:
-                    return false;
+                    throw new Exception('Unknown parameter!');
+                    //return false;
            }
         }
         
-        return true;
+        //return true;
     }
 
     public function CreateDiscoverMessage(){
