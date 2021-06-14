@@ -243,7 +243,7 @@ class Ventilator extends IPSModule {
 	
 	private function Send(string $Text, string $ClientIP, int $ClientPort){
 		try {
-			$this->SendDebug(IPS_GetName($this->InstanceID), Debug::SENDINGDATA, 0);
+			$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::SENDINGDATA,  bin2hex($Text)), 0);
 			$this->SendDataToParent(json_encode(['DataID' => '{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}', "ClientIP" => $ClientIP, "ClientPort" => $ClientPort, "Buffer" => iconv("ISO-8859-1", "UTF-8", $Text)]));
 		} catch(Exception $e) {
 			$this->LogMessage(sprintf(Errors::UNEXPECTED,  $e->getMessage()), KL_ERROR);
