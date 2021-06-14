@@ -124,6 +124,8 @@ class Debug {
     const RECEIVEDDATAFROMPARENT = 'ReceiveData(): Received data. The data is "%s"';
     const SENDTTOPARENTFAILED = 'Send(): Failed to send message to parrent instance. The error was "%s"';
     const REQUESTACTIONFAILED = 'RequestAction(): Unexpected error. The error was: "%s"';
+    const VERIFYINGIOINSTANCE = 'VerifyDevice(): Verifying I/O instance %s...';
+    const INSTANCEVERIFIED = 'VerifyDevice(): The instance %s is OK';
 }
 
 class Modules {

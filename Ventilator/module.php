@@ -198,6 +198,9 @@ class Ventilator extends IPSModule {
 
 	private function VerifyDevice() {
 		$socketId = IPS_GetInstance($this->InstanceID)["ConnectionID"];
+
+		$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::VERIFYINGIOINSTANCE, $socketId), 0);
+		
 		if(json_decode(IPS_GetConfiguration($socketId), true)["Open"]==true) {
 			$report['IpAddressCheck'] = 0; // Reset count on success
 		
@@ -207,6 +210,8 @@ class Ventilator extends IPSModule {
 			}
 			
 			$this->SetStatus(102);
+
+			$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::INSTANCEVERIFIED, $socketId), 0);
 			
 			return true;
 		} else 
@@ -232,7 +237,7 @@ class Ventilator extends IPSModule {
 			$this->LogMessage($msg, KL_ERROR);
 		}
 
-		$this->SendDebug(IPS_GetName($this->InstanceID), msg, 0);
+		$this->SendDebug(IPS_GetName($this->InstanceID), 'VeryfyDevice(): '.$msg, 0);
 		
 		return false;	
 	}
