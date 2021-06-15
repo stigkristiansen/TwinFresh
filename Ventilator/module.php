@@ -297,7 +297,7 @@ class Ventilator extends IPSModule {
 				$this->SetValueEx(Variables::BOOSTMODE_IDENT, $value);
 		//} else {
 		} catch (Exception $e) {
-			$this->LogMessage(sprintf(Errors::UNEXPECTED, $e->getMessage()), KL_ERROR); // Bytt tekst eller feilsjekk til try/catch/raise
+			$this->LogMessage(sprintf(Errors::UNEXPECTED, $e->getMessage()), KL_ERROR); 
 			$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::DECODEFAILED, $e->getMessage()), 0);
 		}
 	}

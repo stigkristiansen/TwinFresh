@@ -124,7 +124,7 @@ class Debug {
     const DECODEOK = 'ReceiveData(): Decoded incoming message';
     const RECEIVEDDATAFROMPARENT = 'ReceiveData(): Received data. The data is "%s"';
     const SENDTTOPARENTFAILED = 'Send(): Failed to send message to parrent instance. The error was "%s"';
-    const SENDINGDATA = 'Send(): Transmitting data to parent i/o instance. The data is "%s"';
+    const SENDINGDATA = 'Send(): Transmitting data to parent I/O instance. The data is "%s"';
     const VERIFYINGIOINSTANCE = 'VerifyDevice(): Verifying I/O instance %s...';
     const INSTANCEVERIFIED = 'VerifyDevice(): The instance %s is OK';
     const REQUESTACTIONFAILED = 'RequestAction(): Unexpected error. The error was: "%s"';

@@ -137,7 +137,6 @@
 
 				try {
 					$proto = new Protocol();
-				//if($proto->Decode($buffer)==false) {
 					$proto->Decode($buffer);
 
 					$controlId = $proto->GetControlId();
@@ -155,7 +154,9 @@
 						Properties::IPADDRESS => $ipAddress,
 						Properties::MODEL => $model
 					];
+				
 				} catch (Exception $e) {
+					$this->LogMessage(sprintf(Errors::UNEXPECTED, $e->getMessage()), KL_ERROR); 
 					$this->SendDebug(IPS_GetName($this->InstanceID), Debug::INVALIDDATA, 0);
 					$i--;
 					continue;
