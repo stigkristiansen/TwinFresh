@@ -110,6 +110,8 @@ class Debug {
     const STARTINGDISCOVERY = 'DiscoverTFDevices(): Starting discovery of TwinFresh devices';
     const CREATESOCKETFAILED = 'DiscoverTFDevices(): Creating socket failed!';
     const SENDSOCKETFAILED = 'DiscoverTFDevices(): Sending socket failed!';
+    const RECEIVESOCKETFAILED = 'DiscoverTFDevices(): Receive socket failed!';
+    const DISCOVERDECODEFAILED = 'DiscoverTFDevices(): Failed to decode the incoming message. The error was "%s"';
     const FORMCOMPLETED = 'GetConfigurationForm(): The Configuration form build is complete';
     const ADDINGINSTANCE = 'GetConfigurationForm(): Added existing instance "%s" with InstanceId %d';
     const ADDINGEXISTINGINSTANCE = 'GetConfigurationForm(): Adding existing instances that are not discovered';
@@ -129,6 +131,7 @@ class Debug {
     const POWER = 'RequestAction(): Handling Power...';
     const SPEED = 'RequestAction(): Handling Speed...';
     const MODE = 'RequestAction(): Handling Mode...';
+    
     
 }
 

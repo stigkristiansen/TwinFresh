@@ -124,6 +124,7 @@
 				$ret = @socket_recvfrom($socket, $buffer, 1024, 0, $ipAddress, $port);
 				
 				if ($ret === false) {
+					$this->SendDebug(IPS_GetName($this->InstanceID), Debug::RECEIVESOCKETFAILED, 0);
 					break;
 				}
 
@@ -134,28 +135,32 @@
 				
 				$this->SendDebug(IPS_GetName($this->InstanceID), Debug::RECEIVEDDATA, 0);
 
-				$proto = new Protocol();
-				if($proto->Decode($buffer)==false) {
+				try {
+					$proto = new Protocol();
+				//if($proto->Decode($buffer)==false) {
+					$proto->Decode($buffer);
+
+					$controlId = $proto->GetControlId();
+					$model = $proto->GetModel();
+	
+					if($model=='' || $controlId=='') {
+						$this->SendDebug(IPS_GetName($this->InstanceID), Debug::INVALIDDATA, 0);
+						$i--;
+						continue;
+					}
+	
+					$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::FOUNDDEVICE, $controlId), 0);
+	
+					$devices[$controlId] = [
+						Properties::IPADDRESS => $ipAddress,
+						Properties::MODEL => $model
+					];
+				} catch (Exception $e) {
 					$this->SendDebug(IPS_GetName($this->InstanceID), Debug::INVALIDDATA, 0);
 					$i--;
 					continue;
 				};
-
-				$controlId = $proto->GetControlId();
-				$model = $proto->GetModel();
-
-				if($model=='' || $controlId=='') {
-					$this->SendDebug(IPS_GetName($this->InstanceID), Debug::INVALIDDATA, 0);
-					$i--;
-					continue;
-				}
-
-				$this->SendDebug(IPS_GetName($this->InstanceID), sprintf(Debug::FOUNDDEVICE, $controlId), 0);
-
-				$devices[$controlId] = [
-					Properties::IPADDRESS => $ipAddress,
-					Properties::MODEL => $model
-				];
+				
 			}
 
 			socket_close($socket);
