@@ -88,7 +88,7 @@
 		}
 	
 		private function DiscoverTFDevices() : array {
-			$this->LogMessage(Messages::DISCOVER, KL_MESSAGE);
+			$this->LogMessage(Messages::DISCOVER, KL_NOTIFY);
 
 			$this->SendDebug(IPS_GetName($this->InstanceID), Debug::STARTINGDISCOVERY, 0);
 			
